@@ -18,7 +18,7 @@ public class Shoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -28,21 +28,21 @@ public class Shoot : MonoBehaviour
         m_ShootCdRemain -= Time.deltaTime;
         if (m_ShootCdRemain >= 0) { return; }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             if (m_Bubble == null)
             {
                 SpawnBubble();
             }
         }
-        else if (Input.GetKey(KeyCode.Space))
+        else if (Input.GetKey(KeyCode.K))
         {
             if (m_GrowCdRemain <= 0)
             {
                 GrowBubble();
             }
         }
-        else if (Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetKeyUp(KeyCode.K))
         {
             ShootBubble();
         }
