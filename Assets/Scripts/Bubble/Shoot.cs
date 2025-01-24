@@ -8,9 +8,11 @@ public class Shoot : MonoBehaviour
     public float m_ShootCd = 1.0f;
     private float m_ShootCdRemain = 0.0f;
 
-    public int m_MaxGrows = 5;
-    public float m_GrowCd = 0.1f;
+    public int m_MaxGrows = 15;
+    public float m_GrowCd = 0.05f;
     private float m_GrowCdRemain = 0.0f;
+
+    public float m_BubbleSpeed = 0.08f;
 
     private GameObject m_Bubble;
     private int m_Grown = 0;
@@ -51,6 +53,7 @@ public class Shoot : MonoBehaviour
     public void SpawnBubble()
     {
         m_Bubble = Instantiate(m_BubblePrefab, transform);
+        m_Bubble.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     private void GrowBubble()
@@ -63,8 +66,6 @@ public class Shoot : MonoBehaviour
 
         var scale = 0.1f + m_Grown * 0.1f;
         m_Bubble.transform.localScale = new Vector3(scale, scale, scale);
-
-        Debug.Log("Grown to .. " + m_Grown);
     }
 
     private void ShootBubble()
@@ -73,8 +74,12 @@ public class Shoot : MonoBehaviour
         m_GrowCdRemain = m_GrowCd;
         if (m_Bubble == null) { return; }
 
+        float adjustSpeedBySize = 1.0f - ((float)m_Grown / (m_MaxGrows + 1));
+
         bool left = false;
         Vector3 direction = new Vector3(left ? -1 : 1, 0, 0);
+        direction *= m_BubbleSpeed;
+        direction *= adjustSpeedBySize;
         m_Bubble.GetComponent<Bubble>().Init(direction);
 
         m_Grown = 0;
