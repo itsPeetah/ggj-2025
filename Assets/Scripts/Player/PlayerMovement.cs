@@ -1,14 +1,12 @@
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.PlayerLoop;
 
-public class Movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Components")]
     private Rigidbody2D rbody;
     public Transform leftFoot, rightFoot;
+    public Transform visualsRoot;
 
 
     [Header("Values")]
@@ -17,7 +15,6 @@ public class Movement : MonoBehaviour
     public float jumpForce = 10f;
     public float maxJumpDuration = 1f;
     public float walkSpeed = 6f;
-    public float acceleration = 100f;
     public float jumpBufferWindow = 0.2f;
 
 
@@ -26,8 +23,6 @@ public class Movement : MonoBehaviour
     public LayerMask whatIsGround;
 
     // State
-    private float currentSpeed = 0;
-    private float currentAcceleration = 0;
     private float currentGravityScale = 0;
     private Vector2 currentMoveInput = Vector2.zero;
     private bool currentJumpInput = false;
@@ -37,6 +32,9 @@ public class Movement : MonoBehaviour
     private bool queueJump = false;
     private float queueJumpTime = 0;
     private float jumpTimeRemaining = 0;
+    private bool facingLeft = false;
+
+    public bool FacingLeft => facingLeft;
 
     private void Start()
     {
@@ -45,6 +43,7 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        // Handle jumping
         if (currentJumpInput && !previousJumpInput)
         {
             queueJump = true;
@@ -57,20 +56,34 @@ public class Movement : MonoBehaviour
         }
 
         previousJumpInput = currentJumpInput;
+
+        // Handle direction
+        bool prevFacingLeft = facingLeft;
+        if (currentMoveInput.x < 0) facingLeft = true;
+        else if (currentMoveInput.x > 0) facingLeft = false;
+
+        if (prevFacingLeft != facingLeft)
+        {
+            Vector3 scale = visualsRoot.transform.localScale;
+            scale.x *= -1;
+            visualsRoot.transform.localScale = scale;
+        }
     }
 
     private void FixedUpdate()
     {
         CheckGround();
-        Vector2 vel = rbody.linearVelocity;
 
+        Vector2 vel = rbody.linearVelocity;
+        vel.x = currentMoveInput.x * walkSpeed;
+
+        // Initiate jump
         if (queueJump && isGrounded && !isJumping)
         {
             jumpTimeRemaining = maxJumpDuration;
             isJumping = true;
             queueJump = false;
         }
-
         if (isJumping)
         {
             if (!currentJumpInput || jumpTimeRemaining <= 0)
@@ -79,8 +92,7 @@ public class Movement : MonoBehaviour
         }
 
 
-        vel.x = currentMoveInput.x * walkSpeed;
-
+        // Jump vs fall/airborne
         if (isJumping)
         {
             currentGravityScale = Mathf.Abs(jumpGravity / Physics2D.gravity.y);
@@ -91,8 +103,7 @@ public class Movement : MonoBehaviour
             currentGravityScale = Mathf.Abs(fallGravity / Physics2D.gravity.y);
         }
 
-
-
+        // apply physics
         rbody.gravityScale = currentGravityScale;
         rbody.linearVelocity = vel;
     }

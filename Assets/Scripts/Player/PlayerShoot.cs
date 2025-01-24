@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Android.Gradle;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Shoot : MonoBehaviour
+public class PlayerShoot : MonoBehaviour
 {
-    public GameObject m_BubblePrefab;
+    public Transform m_BubbleSpawn;
+    public GameObjectPool m_BubblePool;
+    public PlayerMovement m_Movement;
+
     public float m_ShootCd = 1.0f;
     private float m_ShootCdRemain = 0.0f;
 
@@ -14,45 +19,45 @@ public class Shoot : MonoBehaviour
 
     public float m_BubbleSpeed = 0.08f;
 
-    private GameObject m_Bubble;
+    private Bubble m_Bubble;
     private int m_Grown = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    // Made this compatible with the "new" input system
+    // m_keyIsDown is set through HandleShootInput() which is invoked by the PlayerInput component
+    private bool m_keyIsDown = false;
+    private bool m_KeyWasDown = false;
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
         m_GrowCdRemain -= Time.deltaTime;
         m_ShootCdRemain -= Time.deltaTime;
         if (m_ShootCdRemain >= 0) { return; }
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (!m_KeyWasDown && m_keyIsDown)
         {
             if (m_Bubble == null)
             {
                 SpawnBubble();
             }
         }
-        else if (Input.GetKey(KeyCode.K))
+        else if (m_KeyWasDown && m_keyIsDown)
         {
             if (m_GrowCdRemain <= 0)
             {
                 GrowBubble();
             }
         }
-        else if (Input.GetKeyUp(KeyCode.K))
+        else if (m_KeyWasDown && !m_keyIsDown)
         {
             ShootBubble();
         }
+
+        m_KeyWasDown = m_keyIsDown;
     }
 
     public void SpawnBubble()
     {
-        m_Bubble = Instantiate(m_BubblePrefab, transform);
+        m_Bubble = m_BubblePool.GetNext() as Bubble; // instead of instantiating a new one it takes the first available in a pool
         m_Bubble.GetComponent<BoxCollider2D>().enabled = false;
     }
 
@@ -76,13 +81,19 @@ public class Shoot : MonoBehaviour
 
         float adjustSpeedBySize = 1.0f - ((float)m_Grown / (m_MaxGrows + 1));
 
-        bool left = false;
+        bool left = m_Movement.FacingLeft;
         Vector3 direction = new Vector3(left ? -1 : 1, 0, 0);
         direction *= m_BubbleSpeed;
         direction *= adjustSpeedBySize;
-        m_Bubble.GetComponent<Bubble>().Init(direction);
+        m_Bubble.Init(m_BubbleSpawn.position, direction); // setting position in init
+        m_Bubble.Enable(); // this turns the object on
 
         m_Grown = 0;
         m_Bubble = null;
+    }
+
+    public void HandleShootInput(InputAction.CallbackContext ctx)
+    {
+        m_keyIsDown = ctx.performed;
     }
 }

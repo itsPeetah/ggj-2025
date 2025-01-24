@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bubble : MonoBehaviour
+public class Bubble : PoolableObject
 {
     private Vector3 m_Direction = Vector3.zero;
 
@@ -11,7 +11,7 @@ public class Bubble : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -37,8 +37,9 @@ public class Bubble : MonoBehaviour
         }
     }
 
-    public void Init(Vector3 direction)
+    public void Init(Vector3 position, Vector3 direction)
     {
+        transform.position = position;
         m_Direction = direction;
     }
 
@@ -49,6 +50,6 @@ public class Bubble : MonoBehaviour
         var growBy = obj.transform.localScale *= 0.3f;
         transform.localScale += growBy;
 
-        Destroy(obj);
+        Disable();
     }
 }
