@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Bubble : PoolableObject
 {
+    public float m_Lifetime = 5.0f;
+    private float m_LifetimeLeft;
+
     private Vector3 m_Direction = Vector3.zero;
-    private GameObject m_CapturedBy;
+    private Capturable m_Captured;
 
     // Start is called before the first frame update
     void Start()
@@ -16,27 +19,37 @@ public class Bubble : PoolableObject
     {
         base.Enable();
 
+        m_LifetimeLeft = m_Lifetime;
         SetEnableColliders(true);
         SetTriggerColliders(true);
-        m_CapturedBy = null;
+        m_Captured = null;
     }
 
     public override void Disable()
     {
         base.Disable();
-        m_CapturedBy = null;
+        if (m_Captured != null)
+        {
+            m_Captured.Release();
+        }
+        m_Captured = null;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_CapturedBy == null)
+        m_LifetimeLeft -= Time.deltaTime;
+        if (m_LifetimeLeft < 0)
         {
-            transform.position += m_Direction;
-        }    
-        else
+            Disable();
+            return;
+        }
+
+        transform.position += m_Direction;
+
+        if (m_Captured != null)
         {
-            transform.position = m_CapturedBy.transform.position;
+            m_Captured.transform.position = transform.position;
         }
     }
 
@@ -77,11 +90,13 @@ public class Bubble : PoolableObject
         transform.localScale += growBy;
     }
 
-    public void Capture(GameObject obj)
+    public void Capture(Capturable obj)
     {
-        m_Direction = Vector3.zero;
+        m_Direction = new Vector3(m_Direction.x * 0.3f, +m_Direction.x * 0.1f, 0.0f);
         SetEnableColliders(false);
-        m_CapturedBy = obj;
+        m_LifetimeLeft = m_Lifetime;
+        m_Captured = obj;
+        m_Captured.Capture();
     }
 
     private void SetEnableColliders(bool enable)

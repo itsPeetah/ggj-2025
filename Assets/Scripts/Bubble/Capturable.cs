@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Caputrable : MonoBehaviour
+public class Capturable : MonoBehaviour
 {
     public List<MonoBehaviour> m_DisableOnCapture = new List<MonoBehaviour>();
     private bool m_IsCaptured = false;
@@ -24,19 +24,11 @@ public class Caputrable : MonoBehaviour
         {
             if (CanCapture())
             {
-                m_IsCaptured = true;
-                collision.gameObject.GetComponent<Bubble>().Capture(gameObject);
-                foreach (var b in m_DisableOnCapture)
-                {
-                    if (b != null)
-                    {
-                        b.enabled = false;
-                    }
-                }
+                collision.gameObject.GetComponent<Bubble>().Capture(this);
             }
             else
             {
-                collision.gameObject.GetComponent<Bubble>().Disable();
+                //collision.gameObject.GetComponent<Bubble>().Disable();
             }
         }
     }
@@ -45,4 +37,28 @@ public class Caputrable : MonoBehaviour
     {
         return !m_IsCaptured;
     }
+
+    public void Capture()
+    {
+        m_IsCaptured = true;
+        foreach (var b in m_DisableOnCapture)
+        {
+            if (b != null)
+            {
+                b.enabled = false;
+            }
+        }
+    }
+
+    public void Release()
+    {
+        m_IsCaptured = false;
+        foreach (var b in m_DisableOnCapture)
+        {
+            if (b != null)
+            {
+                b.enabled = true;
+            }
+        }
+    }    
 }
