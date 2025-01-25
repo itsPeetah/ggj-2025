@@ -64,6 +64,10 @@ public class PlayerShoot : MonoBehaviour
     {
         m_Bubble = m_BubblePool.GetNext() as Bubble; // instead of instantiating a new one it takes the first available in a pool
         m_Bubble.transform.position = m_BubbleSpawn.position;
+
+        var scale = m_BubbleGrowBy + m_Grown * m_BubbleGrowBy;
+        m_Bubble.transform.localScale = new Vector3(scale, scale, scale);
+
         m_Bubble.Enable(); // this turns the object on
         GrowBubble();
     }
