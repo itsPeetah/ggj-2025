@@ -1245,6 +1245,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 545833693450787802, guid: 9b0111781514a6045a26bce77299b658, type: 3}
+      propertyPath: m_BubbleSpeed
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 2120448943486159891, guid: 9b0111781514a6045a26bce77299b658, type: 3}
       propertyPath: m_Name
       value: Player_animated
@@ -1292,6 +1296,10 @@ PrefabInstance:
     - target: {fileID: 6774267514957755155, guid: 9b0111781514a6045a26bce77299b658, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231606992381687239, guid: 9b0111781514a6045a26bce77299b658, type: 3}
+      propertyPath: whatIsGround.m_Bits
+      value: 257
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
