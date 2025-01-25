@@ -92,8 +92,10 @@ public class Bubble : PoolableObject
 
     public void Capture(Capturable obj)
     {
-        m_Direction = new Vector3(m_Direction.x * 0.3f, +m_Direction.x * 0.1f, 0.0f);
-        SetEnableColliders(false);
+        if (m_Captured != null) { return; }
+
+        m_Direction = new Vector3(m_Direction.x * 0.3f, Mathf.Abs(m_Direction.x) * 0.1f, 0.0f);
+        //SetEnableColliders(false);
         m_LifetimeLeft = m_Lifetime;
         m_Captured = obj;
         m_Captured.Capture();
