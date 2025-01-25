@@ -30,7 +30,9 @@ public class PlayerShoot : MonoBehaviour
         if (m_Bubble != null)
         {
             m_Bubble.transform.position = m_BubbleSpawn.transform.position;
-            m_Bubble.transform.position += new Vector3(m_Grown * m_BubbleGrowBy * 0.5f, m_Grown * m_BubbleGrowBy * 0.5f);
+
+            float offset = m_Grown * m_BubbleGrowBy * 0.5f;
+            m_Bubble.transform.position += new Vector3(offset * (m_Movement.FacingLeft ? -1.0f : 1.0f), offset);
         }
         m_GrowCdRemain -= Time.deltaTime;
         m_ShootCdRemain -= Time.deltaTime;

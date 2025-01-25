@@ -89,7 +89,7 @@ public class Turnstile : MonoBehaviour
 
         if (bubble.TryGetComponent<Bubble>(out Bubble bubbleComponent))
         {
-            bubbleComponent.Disable();
+            bubbleComponent.Pop();
         }
 
     }
