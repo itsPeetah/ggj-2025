@@ -14,6 +14,7 @@ public class PlayerShoot : MonoBehaviour
 
     public int m_MaxGrows = 15;
     public float m_GrowCd = 0.05f;
+    public float m_BubbleGrowBy = 0.1f;
     private float m_GrowCdRemain = 0.0f;
 
     public float m_BubbleSpeed = 0.08f;
@@ -57,6 +58,7 @@ public class PlayerShoot : MonoBehaviour
     public void SpawnBubble()
     {
         m_Bubble = m_BubblePool.GetNext() as Bubble; // instead of instantiating a new one it takes the first available in a pool
+        GrowBubble();
     }
 
     private void GrowBubble()
@@ -65,19 +67,20 @@ public class PlayerShoot : MonoBehaviour
         if (m_Grown >= m_MaxGrows) { return; }
 
         m_Grown += 1;
-        m_GrowCdRemain = m_GrowCd;
+        m_GrowCdRemain -= m_GrowCd;
 
-        var scale = 0.1f + m_Grown * 0.1f;
+        var scale = m_BubbleGrowBy + m_Grown * m_BubbleGrowBy;
         m_Bubble.transform.localScale = new Vector3(scale, scale, scale);
     }
 
     private void ShootBubble()
     {
         m_ShootCdRemain = m_ShootCd;
-        m_GrowCdRemain = m_GrowCd;
+        m_GrowCdRemain -= m_GrowCd;
         if (m_Bubble == null) { return; }
 
-        float adjustSpeedBySize = 1.0f - ((float)m_Grown / (m_MaxGrows + 1));
+        // up to 25% speed penalty for big bubble
+        float adjustSpeedBySize = 1.0f - ((float)m_Grown / (1.5f * m_MaxGrows));
 
         bool left = m_Movement.FacingLeft;
         Vector3 direction = new Vector3(left ? -1 : 1, 0, 0);
