@@ -26,12 +26,12 @@ public class KnockbackReceiver : MonoBehaviour
 
     public IEnumerator DoDisableMovement(Vector2 force, float time)
     {
-
+        bool previousEnabled = movement.enabled;
 
         movement.enabled = false;
         rbody.AddForce(force);
         yield return new WaitForSeconds(time);
-        movement.enabled = true;
+        movement.enabled = previousEnabled;
     }
 
 
