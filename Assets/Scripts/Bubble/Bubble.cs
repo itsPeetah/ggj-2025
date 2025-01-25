@@ -88,12 +88,20 @@ public class Bubble : PoolableObject
     {
         var growBy = obj.transform.localScale *= 0.3f;
         transform.localScale += growBy;
-        ExtendLifetime();
+
+        m_Direction.x *= Mathf.Clamp(1.0f - growBy.x / 1.5f, 0.9f, 1.0f);
+        ExtendLifetime(m_Lifetime / 3.0f);
     }
+
+    private void ExtendLifetime(float by)
+    {
+        m_LifetimeLeft += by;
+        m_LifetimeLeft = Mathf.Min(m_LifetimeLeft, m_Lifetime);
+    }    
 
     private void ExtendLifetime()
     {
-        m_LifetimeLeft = m_Lifetime;
+       m_LifetimeLeft = m_Lifetime;
     }
 
     public void Capture(Capturable obj)
