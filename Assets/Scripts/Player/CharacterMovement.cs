@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -19,6 +18,7 @@ public class CharacterMovement : MonoBehaviour
     public float jumpBufferWindow = 0.2f;
     public bool moveWithGround = true;
     public float offsetFromGround = 0.1f;
+    public float terminalVelocity = 20;
 
 
 
@@ -118,12 +118,12 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // adjust for ground
-        if (isGrounded && !isJumping)
-            vel.y = groundAdjustment;
+
         // apply physics
         rbody.gravityScale = currentGravityScale;
+        vel.y += groundAdjustment;
 
-        rbody.linearVelocity = vel;
+        rbody.linearVelocity = Vector3.ClampMagnitude(vel, terminalVelocity);
     }
 
     public void HandleMoveInput(InputAction.CallbackContext ctx)
