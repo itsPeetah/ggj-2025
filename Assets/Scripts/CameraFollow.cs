@@ -18,9 +18,15 @@ public class CameraFollow : MonoBehaviour
         camera = GetComponent<Camera>();
         transform = gameObject.transform;
 
+        GameObject taggedTarget = GameObject.FindGameObjectWithTag("Camera Target");
+        if (!target || taggedTarget) target = taggedTarget.transform;
+
         Bounds b = constrainArea.bounds;
         boundsMin = b.min;
         boundsMax = b.max;
+
+        constrainArea.transform.parent = null;
+        constrainArea.gameObject.SetActive(false);
     }
 
     private void LateUpdate()
@@ -35,7 +41,7 @@ public class CameraFollow : MonoBehaviour
 
         float cameraHalfWidth = camera.orthographicSize * ((float)(Screen.width) / Screen.height);
         targetPos.x = Mathf.Clamp(x, boundsMin.x + cameraHalfWidth, boundsMax.x - cameraHalfWidth);
-        targetPos.y = Mathf.Clamp(y, boundsMin.y + cameraHalfWidth, boundsMax.y - cameraHalfWidth);
+        targetPos.y = Mathf.Clamp(y, boundsMin.y + camera.orthographicSize, boundsMax.y - camera.orthographicSize);
         targetPos.z = -10;
         transform.position = targetPos;
     }

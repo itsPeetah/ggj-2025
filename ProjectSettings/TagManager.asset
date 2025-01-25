@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Bubble
+  - Camera Target
   layers:
   - Default
   - TransparentFX
