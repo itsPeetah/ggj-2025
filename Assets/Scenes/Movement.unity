@@ -1247,7 +1247,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 545833693450787802, guid: 9b0111781514a6045a26bce77299b658, type: 3}
       propertyPath: m_BubbleSpeed
-      value: 0.01
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2120448943486159891, guid: 9b0111781514a6045a26bce77299b658, type: 3}
       propertyPath: m_Name
@@ -1257,6 +1257,10 @@ PrefabInstance:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 6807698339114325596, guid: 1694e9065a2ac4441a9a1b6d2dc88398, type: 3}
+    - target: {fileID: 4559351406700236770, guid: 9b0111781514a6045a26bce77299b658, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.68
+      objectReference: {fileID: 0}
     - target: {fileID: 6774267514957755155, guid: 9b0111781514a6045a26bce77299b658, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.43
@@ -1626,7 +1630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2753370931686021901, guid: 8d2db5bdb5a21472dbfc7462b381a326, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

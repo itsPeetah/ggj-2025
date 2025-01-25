@@ -139,11 +139,14 @@ public class CharacterMovement : MonoBehaviour
         Collider2D gl = Physics2D.OverlapCircle(leftFoot.position, groundCheckRadius, whatIsGround);
         Collider2D gr = Physics2D.OverlapCircle(rightFoot.position, groundCheckRadius, whatIsGround);
 
-        if (gl.TryGetComponent(out Rigidbody2D glRb))
+        bool left = gl != null;
+        bool right = gr != null;
+
+        if (left && gl.TryGetComponent(out Rigidbody2D glRb))
         {
             groundRigidbody = glRb;
         }
-        else if (gr.TryGetComponent(out Rigidbody2D grRb))
+        else if (right && gr.TryGetComponent(out Rigidbody2D grRb))
         {
             groundRigidbody = grRb;
         }
@@ -152,8 +155,6 @@ public class CharacterMovement : MonoBehaviour
             groundRigidbody = null;
         }
 
-        bool left = gl != null;
-        bool right = gr != null;
         isGrounded = left || right;
 
         if (isGrounded && Mathf.Abs(currentMoveInput.x) > 0.02f)

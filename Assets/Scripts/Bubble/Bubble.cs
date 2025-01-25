@@ -9,10 +9,13 @@ public class Bubble : PoolableObject
 
     private Vector3 m_Direction = Vector3.zero;
     private Capturable m_Captured;
+    private Rigidbody2D m_Rigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
+
+        m_Rigidbody = GetComponent<Rigidbody2D>();
     }
 
     public override void Enable()
@@ -45,7 +48,7 @@ public class Bubble : PoolableObject
             return;
         }
 
-        transform.position += m_Direction;
+        m_Rigidbody.linearVelocity = m_Direction;
 
         if (m_Captured != null)
         {
@@ -55,7 +58,7 @@ public class Bubble : PoolableObject
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Bubble"))
+        if (collision.gameObject.CompareTag("Bubble")) // ???
         {
             if (transform.localScale.x < collision.transform.localScale.x)
             {
@@ -97,11 +100,11 @@ public class Bubble : PoolableObject
     {
         m_LifetimeLeft += by;
         m_LifetimeLeft = Mathf.Min(m_LifetimeLeft, m_Lifetime);
-    }    
+    }
 
     private void ExtendLifetime()
     {
-       m_LifetimeLeft = m_Lifetime;
+        m_LifetimeLeft = m_Lifetime;
     }
 
     public void Capture(Capturable obj)
