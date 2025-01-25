@@ -5,6 +5,7 @@ public class Capturable : MonoBehaviour
 {
     public List<MonoBehaviour> m_DisableOnCapture = new List<MonoBehaviour>();
     private bool m_IsCaptured = false;
+    private bool m_HandledCollision = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,20 +16,22 @@ public class Capturable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        m_HandledCollision = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Bubble"))
+        if (!m_HandledCollision && collision.gameObject.CompareTag("Bubble"))
         {
+            m_HandledCollision = true;
+
             if (CanCapture())
             {
                 collision.gameObject.GetComponent<Bubble>().Capture(this);
             }
             else
             {
-                //collision.gameObject.GetComponent<Bubble>().Disable();
+                collision.gameObject.GetComponent<Bubble>().Disable();
             }
         }
     }

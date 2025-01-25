@@ -83,11 +83,14 @@ public class CharacterMovement : MonoBehaviour
             jumpTimeRemaining = maxJumpDuration;
             isJumping = true;
             queueJump = false;
+            AnimPause();
         }
         if (isJumping)
         {
             if (!currentJumpInput || jumpTimeRemaining <= 0)
+            {
                 isJumping = false;
+            }
             jumpTimeRemaining -= Time.fixedDeltaTime;
         }
 
@@ -114,11 +117,11 @@ public class CharacterMovement : MonoBehaviour
         
         if (ctx.canceled)
         {
-            visualsRoot.GetComponent<SpriteAnimator>().SetPaused(true);
+            AnimPause();
         }
-        else if (ctx.started)
+        else if (ctx.started && !isJumping)
         {
-            visualsRoot.GetComponent<SpriteAnimator>().SetPaused(false);
+            AnimStart();
         }
     }
 
@@ -132,5 +135,20 @@ public class CharacterMovement : MonoBehaviour
         bool left = Physics2D.OverlapCircle(leftFoot.position, groundCheckRadius, whatIsGround) != null;
         bool right = Physics2D.OverlapCircle(rightFoot.position, groundCheckRadius, whatIsGround) != null;
         isGrounded = left || right;
+
+        if (isGrounded && Mathf.Abs(currentMoveInput.x) > 0.02f)
+        {
+            AnimStart();
+        }
+    }
+
+    private void AnimStart()
+    {
+        visualsRoot.GetComponent<SpriteAnimator>().SetPaused(false);
+    }
+
+    private void AnimPause()
+    {
+        visualsRoot.GetComponent<SpriteAnimator>().SetPaused(true);
     }
 }

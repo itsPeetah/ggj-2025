@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  repoolAfter: 5
+  m_Lifetime: 3
 --- !u!212 &-6260236130697578597
 SpriteRenderer:
   m_ObjectHideFlags: 0
