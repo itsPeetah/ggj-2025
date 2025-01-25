@@ -42,9 +42,8 @@ public class Bubble : PoolableObject
         }
     }
 
-    public void Init(Vector3 position, Vector3 direction)
+    public void Shoot(Vector3 direction)
     {
-        transform.position = position;
         m_Direction = direction;
     }
 

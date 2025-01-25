@@ -58,6 +58,8 @@ public class PlayerShoot : MonoBehaviour
     public void SpawnBubble()
     {
         m_Bubble = m_BubblePool.GetNext() as Bubble; // instead of instantiating a new one it takes the first available in a pool
+        m_Bubble.transform.position = m_BubbleSpawn.position;
+        m_Bubble.Enable(); // this turns the object on
         GrowBubble();
     }
 
@@ -86,8 +88,7 @@ public class PlayerShoot : MonoBehaviour
         Vector3 direction = new Vector3(left ? -1 : 1, 0, 0);
         direction *= m_BubbleSpeed;
         direction *= adjustSpeedBySize;
-        m_Bubble.Init(m_BubbleSpawn.position, direction); // setting position in init
-        m_Bubble.Enable(); // this turns the object on
+        m_Bubble.Shoot(direction); // setting position in init
 
         m_Grown = 0;
         m_Bubble = null;
