@@ -29,6 +29,8 @@ public class CutsceneManager : MonoBehaviour
 
     private void Start()
     {
+        slideShowScreen.enabled = false;
+
         onStart.RaiseEvent();
         StartCoroutine(DoSlideshow());
         onCutsceneStart.RaiseEvent();
@@ -48,6 +50,7 @@ public class CutsceneManager : MonoBehaviour
     private IEnumerator DoSlide(CutsceneSlide slide)
     {
         slideShowScreen.sprite = slide.sprite;
+        slideShowScreen.enabled = true;
         onNextSlide.RaiseEvent();
         yield return new WaitForSeconds(slide.duration);
     }
