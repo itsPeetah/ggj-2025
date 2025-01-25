@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,10 @@ public class Bubble : PoolableObject
 {
     public float m_Lifetime = 5.0f;
     private float m_LifetimeLeft;
+    private float m_PopIn;
+
+    public Sprite m_SpriteNormal;
+    public Sprite m_SpritePop;
 
     private Vector3 m_Direction = Vector3.zero;
     private Capturable m_Captured;
@@ -22,7 +27,9 @@ public class Bubble : PoolableObject
     {
         base.Enable();
 
+        GetComponent<SpriteRenderer>().sprite = m_SpriteNormal;
         m_LifetimeLeft = m_Lifetime;
+        m_PopIn = 0.0f;
         SetEnableColliders(true);
         SetTriggerColliders(true);
         m_Captured = null;
@@ -41,10 +48,20 @@ public class Bubble : PoolableObject
     // Update is called once per frame
     void Update()
     {
+        if (m_PopIn > 0)
+        {
+            m_PopIn -= Time.deltaTime;
+            if (m_PopIn < 0)
+            {
+                Disable();
+            }
+            return;
+        }
+
         m_LifetimeLeft -= Time.deltaTime;
         if (m_LifetimeLeft < 0)
         {
-            Disable();
+            Pop();
             return;
         }
 
@@ -59,6 +76,7 @@ public class Bubble : PoolableObject
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bubble")) // ???
+                                                       // dont question mark me! if it collides with another bubble, merge them instaed
         {
             if (transform.localScale.x < collision.transform.localScale.x)
             {
@@ -66,6 +84,33 @@ public class Bubble : PoolableObject
                 return;
             }
             Absorb(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            // Pop if touching player only from left or right
+            
+            Func<Vector2, bool> player_on_side = (Vector2 dir) =>
+            {
+                var hits = Physics2D.RaycastAll(transform.position, dir, 1.5f);
+                foreach (var hit in hits)
+                {
+                    if (hit.collider.gameObject.CompareTag("Player"))
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            };
+            
+            if (player_on_side(Vector2.left) || player_on_side(Vector2.right))
+            {
+                Pop();
+            }
+        }
+        else if (collision.gameObject.CompareTag("Untagged"))
+        {
+            Pop();
         }
     }
 
@@ -96,13 +141,13 @@ public class Bubble : PoolableObject
         ExtendLifetime(m_Lifetime / 3.0f);
     }
 
-    private void ExtendLifetime(float by)
+    public void ExtendLifetime(float by)
     {
         m_LifetimeLeft += by;
         m_LifetimeLeft = Mathf.Min(m_LifetimeLeft, m_Lifetime);
     }
 
-    private void ExtendLifetime()
+    public void ExtendLifetime()
     {
         m_LifetimeLeft = m_Lifetime;
     }
@@ -131,5 +176,20 @@ public class Bubble : PoolableObject
         {
             c.isTrigger = isTrigger;
         }
+    }
+
+    public void Pop()
+    {
+        SetEnableColliders(false);
+        m_Direction = Vector3.zero;
+        m_Rigidbody.linearVelocity = Vector3.zero;
+
+        if (m_Captured != null)
+        {
+            m_Captured.Release();
+        }
+        m_Captured = null;
+        m_PopIn = 0.3f;
+        GetComponent<SpriteRenderer>().sprite = m_SpritePop;
     }
 }
