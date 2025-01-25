@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Bubble : PoolableObject
 {
+    public int m_MinGrowthToHoldPlayer = 6;
     public float m_Lifetime = 5.0f;
     private float m_LifetimeLeft;
     private float m_PopIn;
@@ -15,6 +16,7 @@ public class Bubble : PoolableObject
     private Vector3 m_Direction = Vector3.zero;
     private Capturable m_Captured;
     private Rigidbody2D m_Rigidbody;
+    private int m_Growth;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,7 @@ public class Bubble : PoolableObject
         GetComponent<SpriteRenderer>().sprite = m_SpriteNormal;
         m_LifetimeLeft = m_Lifetime;
         m_PopIn = 0.0f;
+        m_Growth = 0;
         SetEnableColliders(true);
         SetTriggerColliders(true);
         m_Captured = null;
@@ -105,7 +108,7 @@ public class Bubble : PoolableObject
                 return false;
             };
             
-            if (player_on_side(Vector2.left) || player_on_side(Vector2.right))
+            if (GetGrowth() < m_MinGrowthToHoldPlayer || player_on_side(Vector2.left) || player_on_side(Vector2.right))
             {
                 Pop();
             }
@@ -128,10 +131,11 @@ public class Bubble : PoolableObject
         }
     }
 
-    public void Shoot(Vector3 direction)
+    public void Shoot(Vector3 direction, int growth)
     {
         SetTriggerColliders(false);
         m_Direction = direction;
+        m_Growth = growth;
     }
 
     private void Absorb(GameObject obj)
@@ -158,7 +162,7 @@ public class Bubble : PoolableObject
     {
         if (m_Captured != null) { return; }
 
-        m_Direction = new Vector3(m_Direction.x * 0.3f, Mathf.Abs(m_Direction.x) * 0.2f, 0.0f);
+        m_Direction = new Vector3(m_Direction.x * 0.8f, Mathf.Abs(m_Direction.x) * 0.8f, 0.0f);
         //SetEnableColliders(false);
         ExtendLifetime();
         m_Captured = obj;
@@ -193,5 +197,10 @@ public class Bubble : PoolableObject
         m_Captured = null;
         m_PopIn = 0.3f;
         GetComponent<SpriteRenderer>().sprite = m_SpritePop;
+    }
+
+    public int GetGrowth()
+    {
+        return m_Growth;
     }
 }

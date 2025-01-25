@@ -99,7 +99,7 @@ public class PlayerShoot : MonoBehaviour
         Vector3 direction = new Vector3(left ? -1 : 1, 0, 0);
         direction *= m_BubbleSpeed;
         direction *= adjustSpeedBySize;
-        m_Bubble.Shoot(direction); // setting position in init
+        m_Bubble.Shoot(direction, m_Grown); // setting position in init
 
         m_Grown = 0;
         m_Bubble = null;

@@ -5,6 +5,7 @@ public class Capturable : MonoBehaviour
 {
     public List<MonoBehaviour> m_DisableOnCapture = new List<MonoBehaviour>();
     private GameObject m_CapturedBy;
+    public int m_MinBubbleSizeToCapture = 4;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,20 +23,21 @@ public class Capturable : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bubble"))
         {
-            if (CanCapture())
+            var bubble = collision.gameObject.GetComponent<Bubble>();
+            if (CanBeCapturedBy(bubble))
             {
-                collision.gameObject.GetComponent<Bubble>().Capture(this);
+                bubble.Capture(this);
             }
             else if (collision.gameObject != m_CapturedBy)
             {
-                collision.gameObject.GetComponent<Bubble>().Pop();
+                bubble.Pop();
             }
         }
     }
 
-    private bool CanCapture()
+    private bool CanBeCapturedBy(Bubble bubble)
     {
-        return m_CapturedBy == null;
+        return m_CapturedBy == null && bubble.GetGrowth() >= m_MinBubbleSizeToCapture;
     }
 
     public void Capture(GameObject capturer)
