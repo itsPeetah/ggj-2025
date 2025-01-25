@@ -381,7 +381,7 @@ MonoBehaviour:
   visualsRoot: {fileID: 6945571072863715365}
   fallGravity: 50
   jumpGravity: 20
-  jumpForce: 10
+  jumpForce: 8.5
   maxJumpDuration: 0.2
   walkSpeed: 6
   jumpBufferWindow: 0.2
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ed4e9d356c464ade82ad0a27233c89b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6807698339114325596, guid: 6dafd881b8cd39940a14fe25e9d4386b, type: 3}
+  prefab: {fileID: 6807698339114325596, guid: 1694e9065a2ac4441a9a1b6d2dc88398, type: 3}
   poolSize: 10
 --- !u!114 &3662679487325286941
 MonoBehaviour:
