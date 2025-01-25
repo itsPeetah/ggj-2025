@@ -6,27 +6,16 @@ public class Bubble : PoolableObject
 {
     private Vector3 m_Direction = Vector3.zero;
 
-    private float m_UntilEnableCollider = 0.3f;
-
     // Start is called before the first frame update
     void Start()
     {
-
+        GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position += m_Direction;
-
-        if (m_UntilEnableCollider > 0)
-        {
-            m_UntilEnableCollider -= Time.deltaTime;
-            if (m_UntilEnableCollider <= 0)
-            {
-                GetComponent<BoxCollider2D>().enabled = true;
-            }
-        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -34,6 +23,17 @@ public class Bubble : PoolableObject
         if (collision.gameObject.CompareTag("Bubble"))
         {
             Absorb(collision.gameObject);
+        }
+    }
+    void OnCollisionExit2D(Collision2D collision)
+    {
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            GetComponent<BoxCollider2D>().isTrigger = false;
         }
     }
 

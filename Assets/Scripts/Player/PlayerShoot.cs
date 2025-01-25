@@ -57,7 +57,6 @@ public class PlayerShoot : MonoBehaviour
     public void SpawnBubble()
     {
         m_Bubble = m_BubblePool.GetNext() as Bubble; // instead of instantiating a new one it takes the first available in a pool
-        m_Bubble.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     private void GrowBubble()
