@@ -69,7 +69,9 @@ public class Bubble : PoolableObject
 
         if (m_Captured != null)
         {
-            m_Captured.transform.position = transform.position;
+            var attachPos = transform.position;
+            attachPos.y -= transform.localScale.x / 2.0f;
+            m_Captured.transform.position = attachPos;
         }
     }
 
@@ -156,7 +158,7 @@ public class Bubble : PoolableObject
     {
         if (m_Captured != null) { return; }
 
-        m_Direction = new Vector3(m_Direction.x * 0.3f, Mathf.Abs(m_Direction.x) * 0.1f, 0.0f);
+        m_Direction = new Vector3(m_Direction.x * 0.3f, Mathf.Abs(m_Direction.x) * 0.2f, 0.0f);
         //SetEnableColliders(false);
         ExtendLifetime();
         m_Captured = obj;
