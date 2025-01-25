@@ -382,7 +382,7 @@ MonoBehaviour:
   visualsRoot: {fileID: 6945571072863715365}
   fallGravity: 50
   jumpGravity: 20
-  jumpForce: 8.5
+  jumpForce: 10
   maxJumpDuration: 0.2
   walkSpeed: 6
   jumpBufferWindow: 0.2
