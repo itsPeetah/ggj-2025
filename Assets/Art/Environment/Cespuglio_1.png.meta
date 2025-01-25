@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cespuglio_1_0: -5774835674201328908
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
