@@ -51,12 +51,12 @@ public class Patroller : MonoBehaviour
     {
         if (!isMoving) return;
 
-        bool overshootLeft = facingLeft && transform.position.x <= boundsMin.x;
-        bool overshootRight = !facingLeft && transform.position.x >= boundsMax.x;
+        bool overshootLeft = transform.position.x <= boundsMin.x;
+        bool overshootRight = transform.position.x >= boundsMax.x;
 
-        if (overshootLeft || overshootRight)
+        if ((overshootLeft && facingLeft) || (overshootRight && !facingLeft))
         {
-            isMoving = false;
+
             StartCoroutine(DoFlip());
         }
 
@@ -70,6 +70,8 @@ public class Patroller : MonoBehaviour
 
     private IEnumerator DoFlip()
     {
+        isMoving = false;
+        SetMovementDirection(Vector2.zero);
         yield return new WaitForSeconds(endOfPathWaitDuration);
         Flip();
     }

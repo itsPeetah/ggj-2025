@@ -112,7 +112,7 @@ public class CharacterMovement : MonoBehaviour
             currentGravityScale = Mathf.Abs(fallGravity / Physics2D.gravity.y);
         }
 
-        if (isGrounded && groundRigidbody != null)
+        if (isGrounded && groundRigidbody != null && moveWithGround)
         {
             vel += groundRigidbody.linearVelocity;
         }
