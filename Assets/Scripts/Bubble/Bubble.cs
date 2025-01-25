@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -83,6 +84,29 @@ public class Bubble : PoolableObject
                 return;
             }
             Absorb(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            // Pop if touching player only from left or right
+            
+            Func<Vector2, bool> player_on_side = (Vector2 dir) =>
+            {
+                var hits = Physics2D.RaycastAll(transform.position, dir, 1.5f);
+                foreach (var hit in hits)
+                {
+                    if (hit.collider.gameObject.CompareTag("Player"))
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            };
+            
+            if (player_on_side(Vector2.left) || player_on_side(Vector2.right))
+            {
+                Pop();
+            }
         }
         else if (collision.gameObject.CompareTag("Untagged"))
         {
