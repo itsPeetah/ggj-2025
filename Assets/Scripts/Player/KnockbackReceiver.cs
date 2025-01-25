@@ -8,6 +8,7 @@ public class KnockbackReceiver : MonoBehaviour
 
     public Vector2 knockbackForce = new Vector2(4, 4);
     public float knockbackDuration = 0.5f;
+    public bool hasJustReceivedKnockback;
 
     private void Start()
     {
@@ -17,6 +18,8 @@ public class KnockbackReceiver : MonoBehaviour
 
     public void GiveKnockback(Vector2 from)
     {
+        if (hasJustReceivedKnockback) return;
+
         Vector2 force = knockbackForce;
         if (from.x > transform.position.x)
             force.x *= -1;
@@ -27,11 +30,12 @@ public class KnockbackReceiver : MonoBehaviour
     public IEnumerator DoDisableMovement(Vector2 force, float time)
     {
         bool previousEnabled = movement.enabled;
-
+        hasJustReceivedKnockback = true;
         movement.enabled = false;
         rbody.AddForce(force);
         yield return new WaitForSeconds(time);
         movement.enabled = previousEnabled;
+        hasJustReceivedKnockback = false;
     }
 
 
