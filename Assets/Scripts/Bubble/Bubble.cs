@@ -5,17 +5,39 @@ using UnityEngine;
 public class Bubble : PoolableObject
 {
     private Vector3 m_Direction = Vector3.zero;
+    private GameObject m_CapturedBy;
 
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<BoxCollider2D>().isTrigger = true;
+    }
+
+    public override void Enable()
+    {
+        base.Enable();
+
+        SetEnableColliders(true);
+        SetTriggerColliders(true);
+        m_CapturedBy = null;
+    }
+
+    public override void Disable()
+    {
+        base.Disable();
+        m_CapturedBy = null;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += m_Direction;
+        if (m_CapturedBy == null)
+        {
+            transform.position += m_Direction;
+        }    
+        else
+        {
+            transform.position = m_CapturedBy.transform.position;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -30,6 +52,7 @@ public class Bubble : PoolableObject
             Absorb(collision.gameObject);
         }
     }
+
     void OnCollisionExit2D(Collision2D collision)
     {
     }
@@ -38,12 +61,13 @@ public class Bubble : PoolableObject
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GetComponent<BoxCollider2D>().isTrigger = false;
+            SetTriggerColliders(false);
         }
     }
 
     public void Shoot(Vector3 direction)
     {
+        SetTriggerColliders(true);
         m_Direction = direction;
     }
 
@@ -51,5 +75,27 @@ public class Bubble : PoolableObject
     {
         var growBy = obj.transform.localScale *= 0.3f;
         transform.localScale += growBy;
+    }
+
+    public void Capture(GameObject obj)
+    {
+        m_Direction = Vector3.zero;
+        SetEnableColliders(false);
+        m_CapturedBy = obj;
+    }
+
+    private void SetEnableColliders(bool enable)
+    {
+        foreach (var c in GetComponents<Collider2D>())
+        {
+            c.enabled = enable;
+        }
+    }
+    private void SetTriggerColliders(bool isTrigger)
+    {
+        foreach (var c in GetComponents<Collider2D>())
+        {
+            c.isTrigger = isTrigger;
+        }
     }
 }
