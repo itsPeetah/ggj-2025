@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Albero_3_0: -1614806206809847652
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
