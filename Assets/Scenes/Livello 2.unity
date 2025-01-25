@@ -179,6 +179,14 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: -2.002315
       objectReference: {fileID: 0}
+    - target: {fileID: 4302080504811458558, guid: 8d2db5bdb5a21472dbfc7462b381a326, type: 3}
+      propertyPath: offsetFromGround
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302080504811458558, guid: 8d2db5bdb5a21472dbfc7462b381a326, type: 3}
+      propertyPath: groundCheckRadius
+      value: 0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -569,6 +577,14 @@ PrefabInstance:
     - target: {fileID: 4172852390098601736, guid: 8d2db5bdb5a21472dbfc7462b381a326, type: 3}
       propertyPath: m_Offset.y
       value: 1.152058
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302080504811458558, guid: 8d2db5bdb5a21472dbfc7462b381a326, type: 3}
+      propertyPath: offsetFromGround
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302080504811458558, guid: 8d2db5bdb5a21472dbfc7462b381a326, type: 3}
+      propertyPath: groundCheckRadius
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6152,6 +6168,14 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 1.152058
       objectReference: {fileID: 0}
+    - target: {fileID: 4302080504811458558, guid: 8d2db5bdb5a21472dbfc7462b381a326, type: 3}
+      propertyPath: offsetFromGround
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302080504811458558, guid: 8d2db5bdb5a21472dbfc7462b381a326, type: 3}
+      propertyPath: groundCheckRadius
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 9139854916715795898, guid: 8d2db5bdb5a21472dbfc7462b381a326, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.37
@@ -6939,6 +6963,14 @@ PrefabInstance:
     - target: {fileID: 4172852390098601736, guid: 8d2db5bdb5a21472dbfc7462b381a326, type: 3}
       propertyPath: m_Offset.x
       value: 1.9602485
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302080504811458558, guid: 8d2db5bdb5a21472dbfc7462b381a326, type: 3}
+      propertyPath: offsetFromGround
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302080504811458558, guid: 8d2db5bdb5a21472dbfc7462b381a326, type: 3}
+      propertyPath: groundCheckRadius
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

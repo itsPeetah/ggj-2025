@@ -118,10 +118,11 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // adjust for ground
-
+        if (isGrounded && !isJumping)
+            vel.y = groundAdjustment;
         // apply physics
         rbody.gravityScale = currentGravityScale;
-        vel.y += groundAdjustment;
+
         rbody.linearVelocity = vel;
     }
 
