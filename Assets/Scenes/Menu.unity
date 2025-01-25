@@ -776,7 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0890afeff806436a9a9f00770f2599c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Movement
+  sceneToLoad: StartingCutscene
   playButtonPressed: {fileID: 11400000, guid: d7533abe941524acfb801459c2278367, type: 2}
   quitButtonPressed: {fileID: 11400000, guid: 13571abec29a3481cb35f7822c14198b, type: 2}
 --- !u!1 &619394800

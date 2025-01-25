@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerShoot : MonoBehaviour
 {
     public Transform m_BubbleSpawn;
     public GameObjectPool m_BubblePool;
-    public PlayerMovement m_Movement;
+    public CharacterMovement m_Movement;
 
     public float m_ShootCd = 1.0f;
     private float m_ShootCdRemain = 0.0f;
