@@ -29,6 +29,10 @@ public class PlayerShoot : MonoBehaviour
 
     void Update()
     {
+        if (m_Bubble != null)
+        {
+            m_Bubble.transform.position = m_BubbleSpawn.transform.position;
+        }
         m_GrowCdRemain -= Time.deltaTime;
         m_ShootCdRemain -= Time.deltaTime;
         if (m_ShootCdRemain >= 0) { return; }
