@@ -27,6 +27,8 @@ public class Patroller : MonoBehaviour
         boundsMin = b.min;
         boundsMax = b.max;
 
+        patrolArea.gameObject.SetActive(false);
+
         SetMovementDirection(facingLeft ? Vector2.left : Vector2.right);
     }
 
