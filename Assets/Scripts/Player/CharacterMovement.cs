@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class CharacterMovement : MonoBehaviour
     public float walkSpeed = 6f;
     public float jumpBufferWindow = 0.2f;
     public bool moveWithGround = true;
+    public float offsetFromGround = 0.1f;
+
 
 
     [Header("Groundcheck")]
@@ -34,7 +37,8 @@ public class CharacterMovement : MonoBehaviour
     private float queueJumpTime = 0;
     private float jumpTimeRemaining = 0;
     private bool facingLeft = false;
-    public Rigidbody2D groundRigidbody;
+    private Rigidbody2D groundRigidbody;
+    private float groundAdjustment = 0f;
 
     public bool FacingLeft => facingLeft;
 
@@ -108,10 +112,16 @@ public class CharacterMovement : MonoBehaviour
             currentGravityScale = Mathf.Abs(fallGravity / Physics2D.gravity.y);
         }
 
-        if (isGrounded && groundRigidbody != null) vel += groundRigidbody.linearVelocity;
+        if (isGrounded && groundRigidbody != null)
+        {
+            vel += groundRigidbody.linearVelocity;
+        }
+
+        // adjust for ground
 
         // apply physics
         rbody.gravityScale = currentGravityScale;
+        vel.y += groundAdjustment;
         rbody.linearVelocity = vel;
     }
 
@@ -136,24 +146,20 @@ public class CharacterMovement : MonoBehaviour
 
     private void CheckGround()
     {
-        Collider2D gl = Physics2D.OverlapCircle(leftFoot.position, groundCheckRadius, whatIsGround);
-        Collider2D gr = Physics2D.OverlapCircle(rightFoot.position, groundCheckRadius, whatIsGround);
+        RaycastHit2D lh = Physics2D.Raycast(leftFoot.position, Vector2.down, offsetFromGround + groundCheckRadius, whatIsGround);
+        RaycastHit2D rh = Physics2D.Raycast(rightFoot.position, Vector2.down, offsetFromGround + groundCheckRadius, whatIsGround);
 
-        bool left = gl != null;
-        bool right = gr != null;
+        bool left = lh.collider != null;
+        bool right = rh.collider != null;
 
-        if (left && gl.TryGetComponent(out Rigidbody2D glRb))
-        {
-            groundRigidbody = glRb;
-        }
-        else if (right && gr.TryGetComponent(out Rigidbody2D grRb))
-        {
-            groundRigidbody = grRb;
-        }
+        if (left && lh.rigidbody)
+            groundRigidbody = lh.rigidbody;
+        else if (right && rh.rigidbody)
+            groundRigidbody = rh.rigidbody;
         else
-        {
             groundRigidbody = null;
-        }
+
+        groundAdjustment = (lh.distance + rh.distance) * 0.5f;
 
         isGrounded = left || right;
 

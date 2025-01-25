@@ -71,7 +71,7 @@ public class PlayerShoot : MonoBehaviour
         if (m_Grown >= m_MaxGrows) { return; }
 
         m_Grown += 1;
-        m_GrowCdRemain -= m_GrowCd;
+        m_GrowCdRemain = m_GrowCd;
 
         var scale = m_BubbleGrowBy + m_Grown * m_BubbleGrowBy;
         m_Bubble.transform.localScale = new Vector3(scale, scale, scale);
@@ -80,7 +80,7 @@ public class PlayerShoot : MonoBehaviour
     private void ShootBubble()
     {
         m_ShootCdRemain = m_ShootCd;
-        m_GrowCdRemain -= m_GrowCd;
+        // m_GrowCdRemain -= m_GrowCd;
         if (m_Bubble == null) { return; }
 
         // up to 25% speed penalty for big bubble
