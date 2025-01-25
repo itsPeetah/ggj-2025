@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: b0c5e350605f644c3b36d306d0fba271
+guid: a4bd97394cbd8be42b6a815d6dd06a56
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5479140714158469892
-    second: Leva1_0
-  - first:
-      213: 4365432178895210870
-    second: Leva1_1
+      213: 6569694169665961703
+    second: Cielo2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -99,56 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Leva1_0
+      name: Cielo2_0
       rect:
         serializedVersion: 2
-        x: 1131
-        y: 288
-        width: 556
-        height: 217
+        x: 0
+        y: 0
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,30 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 403bbc52371d90c40800000000000000
-      internalID: 5479140714158469892
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Leva1_1
-      rect:
-        serializedVersion: 2
-        x: 1156
-        y: 498
-        width: 8
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 679cb1a0071259c30800000000000000
-      internalID: 4365432178895210870
+      spriteID: 7eef4e12a0e3c2b50800000000000000
+      internalID: 6569694169665961703
       vertices: []
       indices: 
       edges: []
@@ -198,9 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Leva1_0: 5479140714158469892
-      Leva1_1: 4365432178895210870
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

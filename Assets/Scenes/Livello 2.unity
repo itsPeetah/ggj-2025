@@ -343,6 +343,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7863868612304681913, guid: 4da3a3bbf38a84500b2c143c86b33860, type: 3}
+      propertyPath: nextLevelSceneName
+      value: Livello 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1428,7 +1432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4569501086048755369, guid: b3d565c1e0599449ab0f5b59a3b5811f, type: 3}
       propertyPath: m_Size.y
-      value: 24.719824
+      value: 19.227781
       objectReference: {fileID: 0}
     - target: {fileID: 4569501086048755369, guid: b3d565c1e0599449ab0f5b59a3b5811f, type: 3}
       propertyPath: m_Offset.x
@@ -1436,7 +1440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4569501086048755369, guid: b3d565c1e0599449ab0f5b59a3b5811f, type: 3}
       propertyPath: m_Offset.y
-      value: 8.032062
+      value: 5.2860384
       objectReference: {fileID: 0}
     - target: {fileID: 5413698936270890870, guid: b3d565c1e0599449ab0f5b59a3b5811f, type: 3}
       propertyPath: m_Name

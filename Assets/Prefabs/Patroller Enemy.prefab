@@ -159,7 +159,7 @@ MonoBehaviour:
   leftFoot: {fileID: 5991549153823516470}
   rightFoot: {fileID: 4222384216038237344}
   visualsRoot: {fileID: 4628838635515974576}
-  fallGravity: 50
+  fallGravity: 20
   jumpGravity: 20
   jumpForce: 10
   maxJumpDuration: 0.2
@@ -167,6 +167,7 @@ MonoBehaviour:
   jumpBufferWindow: 0.2
   moveWithGround: 1
   offsetFromGround: 0.1
+  terminalVelocity: 10
   groundCheckRadius: 0.01
   whatIsGround:
     serializedVersion: 2
