@@ -127,8 +127,8 @@ GameObject:
   - component: {fileID: 3662679487325286941}
   - component: {fileID: 5762107328616856292}
   m_Layer: 6
-  m_Name: Player
-  m_TagString: Untagged
+  m_Name: Player_animated
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,10 +406,10 @@ MonoBehaviour:
   m_BubblePool: {fileID: 4246806076116140855}
   m_Movement: {fileID: 8231606992381687239}
   m_ShootCd: 1
-  m_MaxGrows: 5
+  m_MaxGrows: 15
   m_GrowCd: 0.1
   m_BubbleGrowBy: 0.1
-  m_BubbleSpeed: 0.08
+  m_BubbleSpeed: 0.05
 --- !u!114 &4246806076116140855
 MonoBehaviour:
   m_ObjectHideFlags: 0
