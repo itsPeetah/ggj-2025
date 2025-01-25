@@ -22,6 +22,11 @@ public class Bubble : PoolableObject
     {
         if (collision.gameObject.CompareTag("Bubble"))
         {
+            if (transform.localScale.x < collision.transform.localScale.x)
+            {
+                Disable();
+                return;
+            }
             Absorb(collision.gameObject);
         }
     }
@@ -45,11 +50,7 @@ public class Bubble : PoolableObject
 
     private void Absorb(GameObject obj)
     {
-        if (transform.localScale.x < obj.transform.localScale.x) { return; }
-
         var growBy = obj.transform.localScale *= 0.3f;
         transform.localScale += growBy;
-
-        Disable();
     }
 }
