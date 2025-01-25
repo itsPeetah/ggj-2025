@@ -16,6 +16,7 @@ public class CharacterMovement : MonoBehaviour
     public float maxJumpDuration = 1f;
     public float walkSpeed = 6f;
     public float jumpBufferWindow = 0.2f;
+    public bool moveWithGround = true;
 
 
     [Header("Groundcheck")]
@@ -33,6 +34,7 @@ public class CharacterMovement : MonoBehaviour
     private float queueJumpTime = 0;
     private float jumpTimeRemaining = 0;
     private bool facingLeft = false;
+    public Rigidbody2D groundRigidbody;
 
     public bool FacingLeft => facingLeft;
 
@@ -106,6 +108,8 @@ public class CharacterMovement : MonoBehaviour
             currentGravityScale = Mathf.Abs(fallGravity / Physics2D.gravity.y);
         }
 
+        if (isGrounded && groundRigidbody != null) vel += groundRigidbody.linearVelocity;
+
         // apply physics
         rbody.gravityScale = currentGravityScale;
         rbody.linearVelocity = vel;
@@ -132,8 +136,24 @@ public class CharacterMovement : MonoBehaviour
 
     private void CheckGround()
     {
-        bool left = Physics2D.OverlapCircle(leftFoot.position, groundCheckRadius, whatIsGround) != null;
-        bool right = Physics2D.OverlapCircle(rightFoot.position, groundCheckRadius, whatIsGround) != null;
+        Collider2D gl = Physics2D.OverlapCircle(leftFoot.position, groundCheckRadius, whatIsGround);
+        Collider2D gr = Physics2D.OverlapCircle(rightFoot.position, groundCheckRadius, whatIsGround);
+
+        if (gl.TryGetComponent(out Rigidbody2D glRb))
+        {
+            groundRigidbody = glRb;
+        }
+        else if (gr.TryGetComponent(out Rigidbody2D grRb))
+        {
+            groundRigidbody = grRb;
+        }
+        else
+        {
+            groundRigidbody = null;
+        }
+
+        bool left = gl != null;
+        bool right = gr != null;
         isGrounded = left || right;
 
         if (isGrounded && Mathf.Abs(currentMoveInput.x) > 0.02f)
