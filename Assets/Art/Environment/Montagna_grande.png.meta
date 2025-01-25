@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Montagna_grande_0: 3340182443454301296
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
