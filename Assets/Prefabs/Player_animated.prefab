@@ -460,6 +460,7 @@ MonoBehaviour:
   - {fileID: 8231606992381687239}
   - {fileID: 545833693450787802}
   - {fileID: 3662679487325286941}
+  - {fileID: 9099055687459973679}
 --- !u!114 &9099055687459973679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,6 +473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ea41ab9677f4c7abbc0f757730e051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackForce: {x: 400, y: 400}
+  knockbackDuration: 0.5
 --- !u!1 &3595549543496174844
 GameObject:
   m_ObjectHideFlags: 0

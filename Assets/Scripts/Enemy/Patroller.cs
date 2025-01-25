@@ -8,8 +8,6 @@ public class Patroller : MonoBehaviour
 
     [Header("Knockback")]
     public LayerTrigger playerDetector;
-    public Vector2 knockbackForce = new Vector2(4, 4);
-    public float knockbackDuration = 0.5f;
 
     [Header("Path")]
     public BoxCollider2D patrolArea;
@@ -91,13 +89,12 @@ public class Patroller : MonoBehaviour
 
         if (player.TryGetComponent(out KnockbackReceiver kb))
         {
-            Vector2 force = knockbackForce;
-            if (transform.position.x > player.transform.position.x)
-            {
-                force.x *= -1;
-            }
-            kb.GiveKnockback(force, knockbackDuration);
-            Flip();
+            kb.GiveKnockback(transform.position);
         }
+        if (
+            transform.position.x > player.transform.position.x && facingLeft ||
+            transform.position.x < player.transform.position.y && !facingLeft
+        )
+            Flip();
     }
 }
