@@ -98,7 +98,7 @@ public class Bubble : PoolableObject
         //SetEnableColliders(false);
         m_LifetimeLeft = m_Lifetime;
         m_Captured = obj;
-        m_Captured.Capture();
+        m_Captured.Capture(gameObject);
     }
 
     private void SetEnableColliders(bool enable)
