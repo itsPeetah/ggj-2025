@@ -18,9 +18,15 @@ public class CameraFollow : MonoBehaviour
         camera = GetComponent<Camera>();
         transform = gameObject.transform;
 
+        GameObject taggedTarget = GameObject.FindGameObjectWithTag("Camera Target");
+        if (!target || taggedTarget) target = taggedTarget.transform;
+
         Bounds b = constrainArea.bounds;
         boundsMin = b.min;
         boundsMax = b.max;
+
+        constrainArea.transform.parent = null;
+        constrainArea.gameObject.SetActive(false);
     }
 
     private void LateUpdate()

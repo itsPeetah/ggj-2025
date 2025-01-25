@@ -74,13 +74,13 @@ public class Bubble : PoolableObject
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SetTriggerColliders(false);
+            //SetTriggerColliders(false);
         }
     }
 
     public void Shoot(Vector3 direction)
     {
-        SetTriggerColliders(true);
+        SetTriggerColliders(false);
         m_Direction = direction;
     }
 
@@ -88,15 +88,23 @@ public class Bubble : PoolableObject
     {
         var growBy = obj.transform.localScale *= 0.3f;
         transform.localScale += growBy;
+        ExtendLifetime();
+    }
+
+    private void ExtendLifetime()
+    {
+        m_LifetimeLeft = m_Lifetime;
     }
 
     public void Capture(Capturable obj)
     {
-        m_Direction = new Vector3(m_Direction.x * 0.3f, +m_Direction.x * 0.1f, 0.0f);
-        SetEnableColliders(false);
-        m_LifetimeLeft = m_Lifetime;
+        if (m_Captured != null) { return; }
+
+        m_Direction = new Vector3(m_Direction.x * 0.3f, Mathf.Abs(m_Direction.x) * 0.1f, 0.0f);
+        //SetEnableColliders(false);
+        ExtendLifetime();
         m_Captured = obj;
-        m_Captured.Capture();
+        m_Captured.Capture(gameObject);
     }
 
     private void SetEnableColliders(bool enable)

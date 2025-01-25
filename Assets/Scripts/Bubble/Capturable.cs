@@ -4,7 +4,7 @@ using UnityEngine;
 public class Capturable : MonoBehaviour
 {
     public List<MonoBehaviour> m_DisableOnCapture = new List<MonoBehaviour>();
-    private bool m_IsCaptured = false;
+    private GameObject m_CapturedBy;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,7 +15,7 @@ public class Capturable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -26,21 +26,21 @@ public class Capturable : MonoBehaviour
             {
                 collision.gameObject.GetComponent<Bubble>().Capture(this);
             }
-            else
+            else if (collision.gameObject != m_CapturedBy)
             {
-                //collision.gameObject.GetComponent<Bubble>().Disable();
+                collision.gameObject.GetComponent<Bubble>().Disable();
             }
         }
     }
 
     private bool CanCapture()
     {
-        return !m_IsCaptured;
+        return m_CapturedBy == null;
     }
 
-    public void Capture()
+    public void Capture(GameObject capturer)
     {
-        m_IsCaptured = true;
+        m_CapturedBy = capturer;
         foreach (var b in m_DisableOnCapture)
         {
             if (b != null)
@@ -52,7 +52,7 @@ public class Capturable : MonoBehaviour
 
     public void Release()
     {
-        m_IsCaptured = false;
+        m_CapturedBy = null;
         foreach (var b in m_DisableOnCapture)
         {
             if (b != null)
