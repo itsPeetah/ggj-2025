@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
     [Header("Components")]
     private Rigidbody2D rbody;
@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     // State
     private float currentGravityScale = 0;
-    private Vector2 currentMoveInput = Vector2.zero;
+    [HideInInspector] public Vector2 currentMoveInput = Vector2.zero;
     private bool currentJumpInput = false;
     private bool previousJumpInput = false;
     private bool isGrounded = false;
