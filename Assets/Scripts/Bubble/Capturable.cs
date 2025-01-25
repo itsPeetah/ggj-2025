@@ -28,7 +28,7 @@ public class Capturable : MonoBehaviour
             }
             else if (collision.gameObject != m_CapturedBy)
             {
-                collision.gameObject.GetComponent<Bubble>().Disable();
+                collision.gameObject.GetComponent<Bubble>().Pop();
             }
         }
     }

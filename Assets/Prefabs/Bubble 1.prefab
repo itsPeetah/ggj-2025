@@ -50,6 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   m_Lifetime: 5
+  m_SpriteNormal: {fileID: 21300000, guid: 31417e00af5584af8b3e8fc217a7b55f, type: 3}
+  m_SpritePop: {fileID: 21300000, guid: 4f86208fc5a154ebd82bb0976ee8de04, type: 3}
 --- !u!212 &-6260236130697578597
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -93,7 +95,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: df20651dc37d6be44a91dc5fbe1e6f74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

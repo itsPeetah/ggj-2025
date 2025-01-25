@@ -7,6 +7,9 @@ public class Bubble : PoolableObject
     public float m_Lifetime = 5.0f;
     private float m_LifetimeLeft;
 
+    public Sprite m_SpriteNormal;
+    public Sprite m_SpritePop;
+
     private Vector3 m_Direction = Vector3.zero;
     private Capturable m_Captured;
     private Rigidbody2D m_Rigidbody;
@@ -22,6 +25,7 @@ public class Bubble : PoolableObject
     {
         base.Enable();
 
+        GetComponent<SpriteRenderer>().sprite = m_SpriteNormal;
         m_LifetimeLeft = m_Lifetime;
         SetEnableColliders(true);
         SetTriggerColliders(true);
@@ -96,13 +100,13 @@ public class Bubble : PoolableObject
         ExtendLifetime(m_Lifetime / 3.0f);
     }
 
-    private void ExtendLifetime(float by)
+    public void ExtendLifetime(float by)
     {
         m_LifetimeLeft += by;
         m_LifetimeLeft = Mathf.Min(m_LifetimeLeft, m_Lifetime);
     }
 
-    private void ExtendLifetime()
+    public void ExtendLifetime()
     {
         m_LifetimeLeft = m_Lifetime;
     }
@@ -131,5 +135,19 @@ public class Bubble : PoolableObject
         {
             c.isTrigger = isTrigger;
         }
+    }
+
+    public void Pop()
+    {
+        SetEnableColliders(false);
+        m_Direction = Vector3.zero;
+
+        if (m_Captured != null)
+        {
+            m_Captured.Release();
+        }
+        m_Captured = null;
+        m_LifetimeLeft = 0.6f;
+        GetComponent<SpriteRenderer>().sprite = m_SpritePop;
     }
 }
