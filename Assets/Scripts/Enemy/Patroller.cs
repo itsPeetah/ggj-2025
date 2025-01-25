@@ -6,6 +6,11 @@ public class Patroller : MonoBehaviour
     private CharacterMovement movement;
     private new Transform transform;
 
+    [Header("Knockback")]
+    public LayerTrigger playerDetector;
+    public Vector2 knockbackForce = new Vector2(4, 4);
+    public float knockbackDuration = 0.5f;
+
     [Header("Path")]
     public BoxCollider2D patrolArea;
     public bool facingLeft = false;
@@ -15,6 +20,16 @@ public class Patroller : MonoBehaviour
     private Vector3 boundsMin;
     private Vector3 boundsMax;
     private bool isMoving;
+
+    private void OnEnable()
+    {
+        playerDetector.onTriggerEnter += HandlePlayerEnter;
+    }
+
+    private void OnDisable()
+    {
+        playerDetector.onTriggerEnter -= HandlePlayerEnter;
+    }
 
     private void Start()
     {
@@ -42,7 +57,7 @@ public class Patroller : MonoBehaviour
         if (overshootLeft || overshootRight)
         {
             isMoving = false;
-            StartCoroutine(Flip());
+            StartCoroutine(DoFlip());
         }
 
     }
@@ -53,10 +68,34 @@ public class Patroller : MonoBehaviour
         movement.currentMoveInput = dir;
     }
 
-    private IEnumerator Flip()
+    private IEnumerator DoFlip()
     {
         yield return new WaitForSeconds(endOfPathWaitDuration);
+        Flip();
+    }
+
+    private void Flip()
+    {
         facingLeft = !facingLeft;
         SetMovementDirection(facingLeft ? Vector2.left : Vector2.right);
+    }
+
+    public void HandlePlayerEnter(Collider2D player)
+    {
+        if (player.TryGetComponent(out Damageable dm))
+        {
+            dm.TakeDamage();
+        }
+
+        if (player.TryGetComponent(out KnockbackReceiver kb))
+        {
+            Vector2 force = knockbackForce;
+            if (transform.position.x > player.transform.position.x)
+            {
+                force.x *= -1;
+            }
+            kb.GiveKnockback(force, knockbackDuration);
+            Flip();
+        }
     }
 }

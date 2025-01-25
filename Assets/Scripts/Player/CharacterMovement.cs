@@ -114,7 +114,7 @@ public class CharacterMovement : MonoBehaviour
     public void HandleMoveInput(InputAction.CallbackContext ctx)
     {
         currentMoveInput = ctx.ReadValue<Vector2>();
-        
+
         if (ctx.canceled)
         {
             AnimPause();
@@ -144,11 +144,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void AnimStart()
     {
-        visualsRoot.GetComponent<SpriteAnimator>().SetPaused(false);
+        visualsRoot.GetComponent<SpriteAnimator>()?.SetPaused(false);
     }
 
     private void AnimPause()
     {
-        visualsRoot.GetComponent<SpriteAnimator>().SetPaused(true);
+        visualsRoot.GetComponent<SpriteAnimator>()?.SetPaused(true);
     }
 }
