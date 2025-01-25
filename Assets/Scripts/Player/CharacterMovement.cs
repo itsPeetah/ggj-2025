@@ -111,6 +111,15 @@ public class CharacterMovement : MonoBehaviour
     public void HandleMoveInput(InputAction.CallbackContext ctx)
     {
         currentMoveInput = ctx.ReadValue<Vector2>();
+        
+        if (ctx.canceled)
+        {
+            visualsRoot.GetComponent<SpriteAnimator>().SetPaused(true);
+        }
+        else if (ctx.started)
+        {
+            visualsRoot.GetComponent<SpriteAnimator>().SetPaused(false);
+        }
     }
 
     public void HandleJumpInput(InputAction.CallbackContext ctx)
