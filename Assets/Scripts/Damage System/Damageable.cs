@@ -12,6 +12,10 @@ public class Damageable : MonoBehaviour
     public VoidEventChannelSO onHealthDepleted;
     public AudioClipEventChannelSO playSfxChannel;
 
+    [Header("Data")]
+    public AudioClip damageSfx;
+    public AudioClip deadSfx;
+
     private void Start()
     {
         currentHp = maxHp;
@@ -32,7 +36,12 @@ public class Damageable : MonoBehaviour
 
         if (currentHp <= 0)
         {
+            playSfxChannel.RaiseEvent(deadSfx);
             onHealthDepleted.RaiseEvent();
+        }
+        else
+        {
+            playSfxChannel.RaiseEvent(damageSfx);
         }
     }
 }

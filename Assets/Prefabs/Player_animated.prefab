@@ -475,6 +475,9 @@ MonoBehaviour:
   currentHp: 3
   onHealthChange: {fileID: 11400000, guid: 1ae324a1288c44e12aeae77bbdc64363, type: 2}
   onHealthDepleted: {fileID: 11400000, guid: beb16c6f5f5d24d518ba459de575a3bf, type: 2}
+  playSfxChannel: {fileID: 11400000, guid: 1f498238a0eb743bf8fad7a94a661b66, type: 2}
+  damageSfx: {fileID: 8300000, guid: a66e3fea863cc4d8fa29134cec3c298b, type: 3}
+  deadSfx: {fileID: 8300000, guid: 99c0d2bd743a149369e9923aedcf8afb, type: 3}
 --- !u!114 &9099055687459973679
 MonoBehaviour:
   m_ObjectHideFlags: 0

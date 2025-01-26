@@ -10,6 +10,17 @@ public class trapTrigger : MonoBehaviour
     public LayerTrigger playerDetector;
     public LayerTrigger bubbleDetector;
 
+    public Sprite openSprite;
+    public Sprite closedSprite;
+
+    private new SpriteRenderer renderer;
+
+    private void Start()
+    {
+        renderer = GetComponentInChildren<SpriteRenderer>();
+        renderer.sprite = openSprite;
+    }
+
     private void OnEnable()
     {
         playerDetector.onTriggerEnter += HandlePlayerEnter;
@@ -25,10 +36,10 @@ public class trapTrigger : MonoBehaviour
     private IEnumerator TrapRoutine()
     {
         isTriggered = true;
-        Debug.Log("Trap triggered");
+        renderer.sprite = closedSprite;
         yield return new WaitForSeconds(triggerDuration);
         isTriggered = false;
-        Debug.Log("Trap reset");
+        renderer.sprite = openSprite;
     }
 
     private void HandlePlayerEnter(Collider2D player)
@@ -44,6 +55,8 @@ public class trapTrigger : MonoBehaviour
         {
             kb.GiveKnockback(transform.position);
         }
+
+        StartCoroutine(TrapRoutine());
     }
 
     private void HandleBubbleEnter(Collider2D bubble)
