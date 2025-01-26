@@ -1,10 +1,17 @@
 using System;
+using SPNK.Game.Events;
 using UnityEngine;
 
 public class EchidnaCarriable : MonoBehaviour
 {
     public LayerTrigger playerDetector;
     public MonoBehaviour[] behavioursToDeactivate;
+
+    public AudioClip tensionMusic;
+
+    [Header("Broadcast to")]
+    public AudioClipEventChannelSO changeMusicChannel;
+
 
     private void OnEnable()
     {
@@ -27,5 +34,7 @@ public class EchidnaCarriable : MonoBehaviour
         {
             carry.PickUp(this.gameObject);
         }
+
+        changeMusicChannel.RaiseEvent(tensionMusic);
     }
 }

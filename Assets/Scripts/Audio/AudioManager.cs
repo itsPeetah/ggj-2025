@@ -27,6 +27,9 @@ public class AudioManager : MonoBehaviour
 
     private void HandleMusicChange(AudioClip clip)
     {
+        if (musicSource.isPlaying)
+            musicSource.Stop();
+
         musicSource.clip = clip;
         musicSource.loop = true;
         musicSource.Play();

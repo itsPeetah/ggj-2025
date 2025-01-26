@@ -167,3 +167,5 @@ MonoBehaviour:
   behavioursToDeactivate:
   - {fileID: 8554462533513895434}
   - {fileID: 451932106307810494}
+  tensionMusic: {fileID: 8300000, guid: 3cc363b8b06c243feb645d09cca1ce09, type: 3}
+  changeMusicChannel: {fileID: 11400000, guid: a985595cc358c4ab5bf7d2bf87bf5852, type: 2}
