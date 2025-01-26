@@ -158,7 +158,7 @@ public class Bubble : PoolableObject
         if (m_Captured != null) { return; }
 
         m_Direction = new Vector3(m_Direction.x * 0.8f, Mathf.Abs(m_Direction.x) * 0.8f, 0.0f);
-        m_Rigidbody.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+        // m_Rigidbody.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
         //SetEnableColliders(false);
         ExtendLifetime();
         m_Captured = obj;
