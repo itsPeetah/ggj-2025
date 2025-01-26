@@ -97,7 +97,7 @@ public class Bubble : PoolableObject
         if (collision.gameObject.CompareTag("Bubble")) // ???
                                                        // dont question mark me! if it collides with another bubble, merge them instaed
         {
-            if (m_BubbleScale.x < collision.transform.localScale.x)
+            if (transform.localScale.x < collision.transform.localScale.x)
             {
                 Disable();
                 return;
@@ -158,7 +158,7 @@ public class Bubble : PoolableObject
 
     private void Absorb(GameObject obj)
     {
-        var growBy = m_BubbleScale *= 0.3f;
+        var growBy = obj.transform.localScale * 0.3f;
         m_BubbleScale += growBy;
 
         m_Direction.x *= Mathf.Clamp(1.0f - growBy.x / 1.5f, 0.9f, 1.0f);
