@@ -569,7 +569,7 @@ MonoBehaviour:
   slideShowScreen: {fileID: 448339959}
   startAfter: 1
   slides:
-  - sprite: {fileID: -919388989212695465, guid: 3adbc3e9997fb463d8a8ad7b5eb08cbc, type: 3}
+  - sprite: {fileID: -7551176101055524867, guid: d73874e3fa87e2d448cba0e25cb39c35, type: 3}
     duration: 2
   sceneToLoad: Livello 1
   onStart: {fileID: 11400000, guid: 8ded49c6181a949529393e812dcd2209, type: 2}
