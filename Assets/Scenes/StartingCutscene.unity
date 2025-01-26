@@ -571,7 +571,7 @@ MonoBehaviour:
   slides:
   - sprite: {fileID: -919388989212695465, guid: 3adbc3e9997fb463d8a8ad7b5eb08cbc, type: 3}
     duration: 2
-  sceneToLoad: Movement
+  sceneToLoad: Livello 1
   onStart: {fileID: 11400000, guid: 8ded49c6181a949529393e812dcd2209, type: 2}
   onCutsceneStart: {fileID: 11400000, guid: e3eceb5a7204e4f4fa430b496550ac08, type: 2}
   onNextSlide: {fileID: 11400000, guid: 72dda4f478bef4533ab9bed28094f874, type: 2}
