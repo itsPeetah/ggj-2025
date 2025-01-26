@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 3662679487325286941}
   - component: {fileID: 9099055687459973679}
   - component: {fileID: 2406348388044109984}
+  - component: {fileID: 6186602493273190752}
   m_Layer: 6
   m_Name: Player_animated
   m_TagString: Player
@@ -503,6 +504,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carryAnchor: {fileID: 1084857295836840743}
   onPickUp: {fileID: 11400000, guid: 78ce6062737f346879dd4ebc32782018, type: 2}
+--- !u!114 &6186602493273190752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120448943486159891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e04f5fdb67b4f27af2b679fcca1a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childPickedUpEvent: {fileID: 11400000, guid: 78ce6062737f346879dd4ebc32782018, type: 2}
+  desiredHealth: 1
 --- !u!1 &3595549543496174844
 GameObject:
   m_ObjectHideFlags: 0
