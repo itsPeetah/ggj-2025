@@ -6,7 +6,8 @@ public class Turnstile : MonoBehaviour
 {
     [Header("Components")]
     public LayerTrigger playerDetector;
-    public LayerTrigger bubbleDetector;
+    public GameObject bubbleDetectorParent;
+    private LayerTrigger[] bubbleDetectors;
     public Transform rotationPivot;
 
     [Header("Data")]
@@ -35,7 +36,11 @@ public class Turnstile : MonoBehaviour
         playerDetector.onTriggerEnter += HandlePlayerEnter;
         playerDetector.onTriggerExit += HandlePlayerExit;
 
-        bubbleDetector.onTriggerEnter += HandleBubbleEnter;
+        bubbleDetectors = bubbleDetectorParent.GetComponentsInChildren<LayerTrigger>();
+        for (int i = 0; i < bubbleDetectors.Length; i++)
+        {
+            bubbleDetectors[i].onTriggerEnter += HandleBubbleEnter;
+        }
     }
 
     private void OnDisable()
@@ -43,7 +48,10 @@ public class Turnstile : MonoBehaviour
         playerDetector.onTriggerEnter -= HandlePlayerEnter;
         playerDetector.onTriggerExit -= HandlePlayerExit;
 
-        bubbleDetector.onTriggerEnter -= HandleBubbleEnter;
+        for (int i = 0; i < bubbleDetectors.Length; i++)
+        {
+            bubbleDetectors[i].onTriggerEnter += HandleBubbleEnter;
+        }
     }
 
     public void Start()

@@ -99,8 +99,8 @@ MonoBehaviour:
   sfxSources:
   - {fileID: 5139229009000326403}
   - {fileID: 2872764640048289978}
-  musicChannel: {fileID: 0}
-  sfxChannel: {fileID: 0}
+  musicChannel: {fileID: 11400000, guid: a985595cc358c4ab5bf7d2bf87bf5852, type: 2}
+  sfxChannel: {fileID: 11400000, guid: 1f498238a0eb743bf8fad7a94a661b66, type: 2}
 --- !u!1 &5876867339002192275
 GameObject:
   m_ObjectHideFlags: 0
