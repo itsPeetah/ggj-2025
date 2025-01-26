@@ -575,6 +575,8 @@ MonoBehaviour:
     duration: 3
   - sprite: {fileID: 1939307743870811483, guid: d03de0bd2acd8bc49b63477140c67908, type: 3}
     duration: 3
+  - sprite: {fileID: 8400116774468138228, guid: 2492e168256d4431b8f5a6536dd9fa71, type: 3}
+    duration: 4
   sceneToLoad: Livello 1
   onStart: {fileID: 11400000, guid: 8ded49c6181a949529393e812dcd2209, type: 2}
   onCutsceneStart: {fileID: 11400000, guid: e3eceb5a7204e4f4fa430b496550ac08, type: 2}
