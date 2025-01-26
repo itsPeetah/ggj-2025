@@ -7,6 +7,7 @@ public class CharacterMovement : MonoBehaviour
     private Rigidbody2D rbody;
     public Transform leftFoot, rightFoot;
     public Transform visualsRoot;
+    public new Transform transform;
 
 
     [Header("Values")]
@@ -43,6 +44,7 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
+        transform = gameObject.transform;
     }
 
     private void Update()
@@ -143,11 +145,15 @@ public class CharacterMovement : MonoBehaviour
     {
         Collider2D lc = Physics2D.OverlapCircle(leftFoot.position, groundCheckRadius, whatIsGround);
         Collider2D rc = Physics2D.OverlapCircle(rightFoot.position, groundCheckRadius, whatIsGround);
+        Collider2D cc = Physics2D.OverlapCircle(transform.position, groundCheckRadius, whatIsGround);
 
         bool left = lc != null;
         bool right = rc != null;
+        bool center = cc != null;
 
-        if (left && lc.TryGetComponent(out Rigidbody2D lr))
+        if (center && cc.TryGetComponent(out Rigidbody2D cr))
+            groundRigidbody = cr;
+        else if (left && lc.TryGetComponent(out Rigidbody2D lr))
             groundRigidbody = lr;
         else if (right && rc.TryGetComponent(out Rigidbody2D rr))
             groundRigidbody = rr;
