@@ -17,7 +17,6 @@ public class CharacterMovement : MonoBehaviour
     public float walkSpeed = 6f;
     public float jumpBufferWindow = 0.2f;
     public bool moveWithGround = true;
-    public float offsetFromGround = 0.1f;
     public float terminalVelocity = 20;
 
 
@@ -38,7 +37,6 @@ public class CharacterMovement : MonoBehaviour
     private float jumpTimeRemaining = 0;
     private bool facingLeft = false;
     private Rigidbody2D groundRigidbody;
-    private float groundAdjustment = 0f;
 
     public bool FacingLeft => facingLeft;
 
@@ -117,12 +115,8 @@ public class CharacterMovement : MonoBehaviour
             vel += groundRigidbody.linearVelocity;
         }
 
-        // adjust for ground
-
         // apply physics
         rbody.gravityScale = currentGravityScale;
-        vel.y += groundAdjustment;
-
         rbody.linearVelocity = Vector3.ClampMagnitude(vel, terminalVelocity);
     }
 
@@ -147,20 +141,18 @@ public class CharacterMovement : MonoBehaviour
 
     private void CheckGround()
     {
-        RaycastHit2D lh = Physics2D.Raycast(leftFoot.position, Vector2.down, offsetFromGround + groundCheckRadius, whatIsGround);
-        RaycastHit2D rh = Physics2D.Raycast(rightFoot.position, Vector2.down, offsetFromGround + groundCheckRadius, whatIsGround);
+        Collider2D lc = Physics2D.OverlapCircle(leftFoot.position, groundCheckRadius, whatIsGround);
+        Collider2D rc = Physics2D.OverlapCircle(rightFoot.position, groundCheckRadius, whatIsGround);
 
-        bool left = lh.collider != null;
-        bool right = rh.collider != null;
+        bool left = lc != null;
+        bool right = rc != null;
 
-        if (left && lh.rigidbody)
-            groundRigidbody = lh.rigidbody;
-        else if (right && rh.rigidbody)
-            groundRigidbody = rh.rigidbody;
+        if (left && lc.TryGetComponent(out Rigidbody2D lr))
+            groundRigidbody = lr;
+        else if (right && rc.TryGetComponent(out Rigidbody2D rr))
+            groundRigidbody = rr;
         else
             groundRigidbody = null;
-
-        groundAdjustment = (lh.distance + rh.distance) * 0.5f;
 
         isGrounded = left || right;
 
