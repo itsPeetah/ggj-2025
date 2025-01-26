@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using SPNK.Game.Events;
 using UnityEngine;
 
 public class Bubble : PoolableObject
@@ -17,6 +18,11 @@ public class Bubble : PoolableObject
     private Capturable m_Captured;
     private Rigidbody2D m_Rigidbody;
     private int m_Growth;
+
+    [Header("Audio")]
+    public AudioClipEventChannelSO playSoundChannel;
+    public AudioClip bubblePopClip;
+    public AudioClip bubbleCreateClip;
 
     public override void Enable()
     {
@@ -131,6 +137,8 @@ public class Bubble : PoolableObject
         SetTriggerColliders(false);
         m_Direction = direction;
         m_Growth = growth;
+
+        playSoundChannel.RaiseEvent(bubbleCreateClip);
     }
 
     private void Absorb(GameObject obj)
@@ -193,6 +201,8 @@ public class Bubble : PoolableObject
         m_Captured = null;
         m_PopIn = 0.3f;
         GetComponent<SpriteRenderer>().sprite = m_SpritePop;
+
+        playSoundChannel.RaiseEvent(bubblePopClip);
     }
 
     public int GetGrowth()

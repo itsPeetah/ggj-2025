@@ -52,6 +52,9 @@ MonoBehaviour:
   m_Lifetime: 5
   m_SpriteNormal: {fileID: 21300000, guid: 31417e00af5584af8b3e8fc217a7b55f, type: 3}
   m_SpritePop: {fileID: 21300000, guid: 4f86208fc5a154ebd82bb0976ee8de04, type: 3}
+  playSoundChannel: {fileID: 11400000, guid: 1f498238a0eb743bf8fad7a94a661b66, type: 2}
+  bubblePopClip: {fileID: 8300000, guid: dfab8fa34228542a3b09cb99d76c796b, type: 3}
+  bubbleCreateClip: {fileID: 8300000, guid: df825efa1184d4202a9680b0cafd9f66, type: 3}
 --- !u!212 &-6260236130697578597
 SpriteRenderer:
   m_ObjectHideFlags: 0

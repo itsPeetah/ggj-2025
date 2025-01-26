@@ -99,6 +99,9 @@ MonoBehaviour:
   bubbleDetector: {fileID: 3861866811380540312}
   openSprite: {fileID: 1302723820812287101, guid: 539f98dba80de46fdb3d73b88c4d96d0, type: 3}
   closedSprite: {fileID: 7781202394294830402, guid: 31b85c7eccbb3427ea5ab2a04e1e4ebb, type: 3}
+  playSoundChannel: {fileID: 11400000, guid: 1f498238a0eb743bf8fad7a94a661b66, type: 2}
+  trapOpenClip: {fileID: 8300000, guid: cad385496ff7a4395adb3a598988dbdb, type: 3}
+  trapCloseClip: {fileID: 8300000, guid: 1860c474f9d1b4808891d65330f2a9b7, type: 3}
 --- !u!114 &1350735056513528679
 MonoBehaviour:
   m_ObjectHideFlags: 0

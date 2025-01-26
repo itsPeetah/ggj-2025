@@ -1,4 +1,5 @@
 using System.Collections;
+using SPNK.Game.Events;
 using UnityEngine;
 
 public class trapTrigger : MonoBehaviour
@@ -14,6 +15,11 @@ public class trapTrigger : MonoBehaviour
     public Sprite closedSprite;
 
     private new SpriteRenderer renderer;
+
+    [Header("Audio")]
+    public AudioClipEventChannelSO playSoundChannel;
+    public AudioClip trapOpenClip;
+    public AudioClip trapCloseClip;
 
     private void Start()
     {
@@ -37,9 +43,11 @@ public class trapTrigger : MonoBehaviour
     {
         isTriggered = true;
         renderer.sprite = closedSprite;
+        playSoundChannel.RaiseEvent(trapOpenClip);
         yield return new WaitForSeconds(triggerDuration);
         isTriggered = false;
         renderer.sprite = openSprite;
+        playSoundChannel.RaiseEvent(trapCloseClip);
     }
 
     private void HandlePlayerEnter(Collider2D player)

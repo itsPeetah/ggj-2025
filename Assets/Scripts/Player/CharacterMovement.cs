@@ -1,3 +1,4 @@
+using SPNK.Game.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -41,6 +42,12 @@ public class CharacterMovement : MonoBehaviour
     private Rigidbody2D groundRigidbody;
 
     public bool FacingLeft => facingLeft;
+
+    [Header("Audio")]
+    public AudioClipEventChannelSO playSoundChannel;
+    public AudioClip jumpOnGround;
+    public AudioClip jumpOnBubble;
+    bool playBubbleJumpSound;
 
     private void Start()
     {
@@ -91,6 +98,12 @@ public class CharacterMovement : MonoBehaviour
             isJumping = true;
             queueJump = false;
             AnimPause();
+
+            if (playSoundChannel != null)
+            {
+                AudioClip c = playBubbleJumpSound ? jumpOnBubble : jumpOnGround;
+                playSoundChannel.RaiseEvent(c);
+            }
         }
         if (isJumping)
         {
@@ -179,6 +192,9 @@ public class CharacterMovement : MonoBehaviour
             var squisher = GetComponent<Squisher>();
             if (squisher != null) { squisher.JumpStart(); }
         }
+
+        // Layer for sound
+        playBubbleJumpSound = LayerMask.LayerToName(cc.gameObject.layer) == "Bubble";
     }
 
     private void AnimStart()
