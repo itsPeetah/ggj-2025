@@ -10,7 +10,7 @@ public class Capturable : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -50,6 +50,12 @@ public class Capturable : MonoBehaviour
                 b.enabled = false;
             }
         }
+
+        if (TryGetComponent<Rigidbody2D>(out Rigidbody2D r))
+        {
+            r.linearVelocity = Vector2.zero;
+            r.gravityScale = 0;
+        }
     }
 
     public void Release()
@@ -62,5 +68,5 @@ public class Capturable : MonoBehaviour
                 b.enabled = true;
             }
         }
-    }    
+    }
 }
