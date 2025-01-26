@@ -10,6 +10,7 @@ public class Damageable : MonoBehaviour
     [Header("Broadcast to")]
     public IntEventChannelSO onHealthChange;
     public VoidEventChannelSO onHealthDepleted;
+    public AudioClipEventChannelSO playSfxChannel;
 
     private void Start()
     {
