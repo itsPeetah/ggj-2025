@@ -194,6 +194,7 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // Layer for sound
+        if(center)
         playBubbleJumpSound = LayerMask.LayerToName(cc.gameObject.layer) == "Bubble";
     }
 
