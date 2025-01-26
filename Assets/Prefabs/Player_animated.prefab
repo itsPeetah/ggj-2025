@@ -459,6 +459,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 257
   currentMoveInput: {x: 0, y: 0}
+  playSoundChannel: {fileID: 11400000, guid: 1f498238a0eb743bf8fad7a94a661b66, type: 2}
+  jumpOnGround: {fileID: 8300000, guid: 4e8b2128e2d5f4837a7201898059e473, type: 3}
+  jumpOnBubble: {fileID: 8300000, guid: 5804c027e944447f6afa5a43dbb75101, type: 3}
 --- !u!114 &545833693450787802
 MonoBehaviour:
   m_ObjectHideFlags: 0
