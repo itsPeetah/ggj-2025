@@ -7,6 +7,7 @@ public class CharacterMovement : MonoBehaviour
     private Rigidbody2D rbody;
     public Transform leftFoot, rightFoot;
     public Transform visualsRoot;
+    public Transform visualSprites;
     private new Transform transform;
 
 
@@ -171,22 +172,22 @@ public class CharacterMovement : MonoBehaviour
         if (!wasGrounded && isGrounded)
         {
             var squisher = GetComponent<Squisher>();
-            if (squisher != null) { squisher.JumpStart(visualsRoot); }
+            if (squisher != null) { squisher.JumpEnd(); }
         }
         if (wasGrounded && !isGrounded)
         {
             var squisher = GetComponent<Squisher>();
-            if (squisher != null) { squisher.JumpEnd(); }
+            if (squisher != null) { squisher.JumpStart(); }
         }
     }
 
     private void AnimStart()
     {
-        visualsRoot.GetComponent<SpriteAnimator>()?.SetPaused(false);
+        visualSprites.GetComponent<SpriteAnimator>()?.SetPaused(false);
     }
 
     private void AnimPause()
     {
-        visualsRoot.GetComponent<SpriteAnimator>()?.SetPaused(true);
+        visualSprites.GetComponent<SpriteAnimator>()?.SetPaused(true);
     }
 }

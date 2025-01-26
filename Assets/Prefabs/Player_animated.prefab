@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1024694590651960141}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4100001, z: 0}
+  m_LocalPosition: {x: -0.02, y: 0.42, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -104,6 +104,7 @@ MonoBehaviour:
   - {fileID: -256504811544517772, guid: 3b99b0baef41f0a44b980127501b0443, type: 3}
   - {fileID: -785748994792727346, guid: cd2b25eaf5dfa5240b941aacb8ee6210, type: 3}
   - {fileID: 3531862608207120756, guid: a8c9c8fe74f07d74c9216fbaf3db0a72, type: 3}
+  - {fileID: -785748994792727346, guid: cd2b25eaf5dfa5240b941aacb8ee6210, type: 3}
   m_Speed: 0.1
 --- !u!1 &1589396336216678548
 GameObject:
@@ -444,6 +445,7 @@ MonoBehaviour:
   leftFoot: {fileID: 4548608106517551401}
   rightFoot: {fileID: 4611785139512699550}
   visualsRoot: {fileID: 5321613383223912761}
+  visualSprites: {fileID: 6945571072863715365}
   fallGravity: 50
   jumpGravity: 20
   jumpForce: 10
