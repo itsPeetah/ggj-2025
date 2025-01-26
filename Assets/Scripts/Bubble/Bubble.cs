@@ -24,6 +24,9 @@ public class Bubble : PoolableObject
     public AudioClip bubblePopClip;
     public AudioClip bubbleCreateClip;
 
+    private Vector3 m_BubbleScale;
+    private bool m_DoWobble = false;
+
     public override void Enable()
     {
         base.Enable();
@@ -32,11 +35,12 @@ public class Bubble : PoolableObject
         m_LifetimeLeft = m_Lifetime;
         m_PopIn = 0.0f;
         m_Growth = 0;
+        m_DoWobble = false;
         SetEnableColliders(true);
         SetTriggerColliders(true);
         m_Captured = null;
         m_Rigidbody = GetComponent<Rigidbody2D>();
-        m_Rigidbody.constraints |= RigidbodyConstraints2D.FreezePositionY;
+        //m_Rigidbody.constraints |= RigidbodyConstraints2D.FreezePositionY;
     }
 
     public override void Disable()
@@ -62,6 +66,15 @@ public class Bubble : PoolableObject
             return;
         }
 
+        if (m_DoWobble)
+        {
+            float s = Mathf.Sin(Time.time);
+            float wobble = 1.0f + Mathf.Abs(s) * 0.1f;
+            transform.localScale = m_BubbleScale * wobble;
+
+            m_Direction.y += Mathf.Sin(Time.time * 3.0f) * 0.0005f;
+        }
+
         m_LifetimeLeft -= Time.deltaTime;
         if (m_LifetimeLeft < 0)
         {
@@ -84,7 +97,7 @@ public class Bubble : PoolableObject
         if (collision.gameObject.CompareTag("Bubble")) // ???
                                                        // dont question mark me! if it collides with another bubble, merge them instaed
         {
-            if (transform.localScale.x < collision.transform.localScale.x)
+            if (m_BubbleScale.x < collision.transform.localScale.x)
             {
                 Disable();
                 return;
@@ -137,14 +150,16 @@ public class Bubble : PoolableObject
         SetTriggerColliders(false);
         m_Direction = direction;
         m_Growth = growth;
-
         playSoundChannel.RaiseEvent(bubbleCreateClip);
+        m_DoWobble = true;
+        m_BubbleScale = transform.localScale;
+
     }
 
     private void Absorb(GameObject obj)
     {
-        var growBy = obj.transform.localScale *= 0.3f;
-        transform.localScale += growBy;
+        var growBy = m_BubbleScale *= 0.3f;
+        m_BubbleScale += growBy;
 
         m_Direction.x *= Mathf.Clamp(1.0f - growBy.x / 1.5f, 0.9f, 1.0f);
         ExtendLifetime(m_Lifetime / 3.0f);
@@ -171,6 +186,7 @@ public class Bubble : PoolableObject
         ExtendLifetime();
         m_Captured = obj;
         m_Captured.Capture(gameObject);
+        m_DoWobble = false;
     }
 
     private void SetEnableColliders(bool enable)
