@@ -159,6 +159,7 @@ MonoBehaviour:
   leftFoot: {fileID: 5991549153823516470}
   rightFoot: {fileID: 4222384216038237344}
   visualsRoot: {fileID: 4628838635515974576}
+  visualSprites: {fileID: 4628838635515974576}
   fallGravity: 20
   jumpGravity: 20
   jumpForce: 10
