@@ -7,7 +7,7 @@ public class CharacterMovement : MonoBehaviour
     private Rigidbody2D rbody;
     public Transform leftFoot, rightFoot;
     public Transform visualsRoot;
-    public new Transform transform;
+    private new Transform transform;
 
 
     [Header("Values")]
@@ -160,11 +160,23 @@ public class CharacterMovement : MonoBehaviour
         else
             groundRigidbody = null;
 
-        isGrounded = left || right;
+        bool wasGrounded = isGrounded;
+        isGrounded = left || right || center;
 
-        if (isGrounded && Mathf.Abs(currentMoveInput.x) > 0.02f)
+        if (!wasGrounded && isGrounded && Mathf.Abs(currentMoveInput.x) > 0.02f)
         {
             AnimStart();
+        }
+
+        if (!wasGrounded && isGrounded)
+        {
+            var squisher = GetComponent<Squisher>();
+            if (squisher != null) { squisher.JumpStart(visualsRoot); }
+        }
+        if (wasGrounded && !isGrounded)
+        {
+            var squisher = GetComponent<Squisher>();
+            if (squisher != null) { squisher.JumpEnd(); }
         }
     }
 
