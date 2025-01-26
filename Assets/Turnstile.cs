@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using SPNK.Game.Events;
 using UnityEngine;
 
 public class Turnstile : MonoBehaviour
@@ -22,6 +23,10 @@ public class Turnstile : MonoBehaviour
     public Color inactiveColor;
     public Color playerDetectedColor;
     public SpriteRenderer activeIndicator;
+    [Header("Audio")]
+    public AudioClipEventChannelSO playSoundChannel;
+    public AudioClip turnSound;
+
 
 
     // Properties
@@ -109,6 +114,7 @@ public class Turnstile : MonoBehaviour
         float startingAngle = lea.z;
         float elapsed = 0;
         activeIndicator.color = busyColor;
+        playSoundChannel.RaiseEvent(turnSound);
         while (elapsed < activationTime)
         {
             lea.z = Mathf.Lerp(startingAngle, targetAngle, elapsed / activationTime);
@@ -127,7 +133,7 @@ public class Turnstile : MonoBehaviour
         float targetAngle = 0f;
         float startingAngle = lea.z;
         float elapsed = 0;
-
+        playSoundChannel.RaiseEvent(turnSound);
         activeIndicator.color = busyColor;
         while (elapsed < activationTime)
         {

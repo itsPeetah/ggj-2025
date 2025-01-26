@@ -16,6 +16,8 @@ public class Damageable : MonoBehaviour
     public AudioClip damageSfx;
     public AudioClip deadSfx;
 
+    public bool invincible = false;
+
     private void Start()
     {
         currentHp = maxHp;
@@ -27,10 +29,19 @@ public class Damageable : MonoBehaviour
         {
             TakeDamage();
         }
+        if (Input.GetKeyDown(KeyCode.Period))
+        {
+            invincible = !invincible;
+        }
     }
 
     public void TakeDamage()
     {
+        if (invincible)
+        {
+            return;
+        }
+
         currentHp -= 1;
         onHealthChange.RaiseEvent(currentHp);
 

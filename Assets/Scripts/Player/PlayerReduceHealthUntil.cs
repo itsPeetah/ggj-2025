@@ -27,7 +27,7 @@ public class PlayerReduceHealthUntil : MonoBehaviour
 
     private void HandleChildPickedUpEvent(bool pickedUp)
     {
-        if (!pickedUp) return;
+        if (!pickedUp || damageable.invincible) return;
 
         while (damageable.currentHp > desiredHealth)
         {

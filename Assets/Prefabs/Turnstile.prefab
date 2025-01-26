@@ -1112,6 +1112,8 @@ MonoBehaviour:
   inactiveColor: {r: 0.93333334, g: 0.3137255, b: 0.3137255, a: 1}
   playerDetectedColor: {r: 0.31372553, g: 0.71064216, b: 0.93333334, a: 1}
   activeIndicator: {fileID: 7370723522288594763}
+  playSoundChannel: {fileID: 11400000, guid: 1f498238a0eb743bf8fad7a94a661b66, type: 2}
+  turnSound: {fileID: 8300000, guid: 1860c474f9d1b4808891d65330f2a9b7, type: 3}
 --- !u!1 &7022768138008698198
 GameObject:
   m_ObjectHideFlags: 0

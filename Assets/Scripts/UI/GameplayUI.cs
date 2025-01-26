@@ -1,4 +1,3 @@
-using System;
 using SPNK.Game.Events;
 using TMPro;
 using UnityEngine;
@@ -16,6 +15,11 @@ public class GameplayUI : MonoBehaviour
     public TMP_Text gameLostText;
     [TextArea] public string noPuggleGameLostMessage;
     [TextArea] public string yesPuggleGameLostMessage;
+
+    [Header("Audio")]
+    public AudioClipEventChannelSO playSoundChannel;
+    public AudioClip winSoundClip;
+    public AudioClip loseSoundClip;
 
     private void Start()
     {
@@ -43,12 +47,14 @@ public class GameplayUI : MonoBehaviour
         Debug.Log("Player is dead");
 
         gameLostScreen.SetActive(true);
+        playSoundChannel.RaiseEvent(loseSoundClip);
     }
 
     private void HandleLevelComplete()
     {
         Debug.Log("Level complete!");
         gameWonScreen.SetActive(true);
+        playSoundChannel.RaiseEvent(winSoundClip);
     }
 
     private void HandlePuggleAcquired(bool value)
