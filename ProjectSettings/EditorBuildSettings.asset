@@ -8,12 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 592ca56c8fd024700bd35e418ec634cb
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 0
-    path: Assets/Scenes/Movement.unity
-    guid: 6a05a3a93d1764d318d9bf2e22228bec
   - enabled: 1
     path: Assets/Scenes/StartingCutscene.unity
     guid: 610a758dfb6034a4e9184a306722c28c
@@ -26,6 +20,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Livello 3.unity
     guid: 49bf4c9003f6f99428a7eca188598106
+  - enabled: 1
+    path: Assets/Scenes/Livello 4.unity
+    guid: 6905e33983ede7945a659a558304dada
+  - enabled: 1
+    path: Assets/Scenes/Final Scene.unity
+    guid: cc3fe39d4f85248058475623fe899571
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
