@@ -14,16 +14,25 @@ public class TintOnDamage : MonoBehaviour
 
     private List<SpriteRenderer> m_Renderers = new List<SpriteRenderer>();
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        onHpChange.OnEventRaised += HandleHPChange;
-
         foreach (var r in m_Renderers)
         {
             r.gameObject.SetActive(false);
         }
         m_Renderers.AddRange(GetComponentsInChildren<SpriteRenderer>(true));
+    }
+
+    private void OnEnable()
+    {
+        onHpChange.OnEventRaised += HandleHPChange;
+    }
+
+    private void OnDisable()
+    {
+        onHpChange.OnEventRaised -= HandleHPChange;
     }
 
     // Update is called once per frame

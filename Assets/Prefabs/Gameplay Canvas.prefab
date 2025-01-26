@@ -198,8 +198,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onPlayerDead: {fileID: 11400000, guid: beb16c6f5f5d24d518ba459de575a3bf, type: 2}
   onLevelComplete: {fileID: 11400000, guid: 69805828ab4474b8d832be6ebda3946d, type: 2}
+  onPuggleAcquired: {fileID: 11400000, guid: 78ce6062737f346879dd4ebc32782018, type: 2}
   gameLostScreen: {fileID: 2545905483392747711}
   gameWonScreen: {fileID: 7316004297972455474}
+  gameLostText: {fileID: 7930974962606351065}
+  noPuggleGameLostMessage: 'm-m-mom.....w-w-where are you........
+
+    why.......'
+  yesPuggleGameLostMessage: 'Your puggles died.
+
+    Be profoundly ashamed of yourself.'
 --- !u!1 &506782154435475409
 GameObject:
   m_ObjectHideFlags: 0
