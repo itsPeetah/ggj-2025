@@ -1349,6 +1349,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7515518137774661221}
     m_Modifications:
+    - target: {fileID: 31025789545726010, guid: bc1d908fb1dcd4bca89c8a9a5fcac39a, type: 3}
+      propertyPath: layersToDetect.m_Bits
+      value: 768
+      objectReference: {fileID: 0}
     - target: {fileID: 1895405638402676180, guid: bc1d908fb1dcd4bca89c8a9a5fcac39a, type: 3}
       propertyPath: m_Name
       value: Turnstile Trigger (1)
@@ -1411,6 +1415,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7515518137774661221}
     m_Modifications:
+    - target: {fileID: 31025789545726010, guid: bc1d908fb1dcd4bca89c8a9a5fcac39a, type: 3}
+      propertyPath: layersToDetect.m_Bits
+      value: 768
+      objectReference: {fileID: 0}
     - target: {fileID: 1895405638402676180, guid: bc1d908fb1dcd4bca89c8a9a5fcac39a, type: 3}
       propertyPath: m_Name
       value: Turnstile Trigger
