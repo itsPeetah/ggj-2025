@@ -18,13 +18,6 @@ public class Bubble : PoolableObject
     private Rigidbody2D m_Rigidbody;
     private int m_Growth;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-        m_Rigidbody = GetComponent<Rigidbody2D>();
-    }
-
     public override void Enable()
     {
         base.Enable();
@@ -36,7 +29,7 @@ public class Bubble : PoolableObject
         SetEnableColliders(true);
         SetTriggerColliders(true);
         m_Captured = null;
-
+        m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Rigidbody.constraints |= RigidbodyConstraints2D.FreezePositionY;
     }
 
@@ -95,7 +88,7 @@ public class Bubble : PoolableObject
         else if (collision.gameObject.CompareTag("Player"))
         {
             // Pop if touching player only from left or right
-            
+
             Func<Vector2, bool> player_on_side = (Vector2 dir) =>
             {
                 var hits = Physics2D.RaycastAll(transform.position, dir, 1.5f);
@@ -109,7 +102,7 @@ public class Bubble : PoolableObject
 
                 return false;
             };
-            
+
             if (GetGrowth() < m_MinGrowthToHoldPlayer || player_on_side(Vector2.left) || player_on_side(Vector2.right))
             {
                 Pop();
@@ -165,7 +158,7 @@ public class Bubble : PoolableObject
         if (m_Captured != null) { return; }
 
         m_Direction = new Vector3(m_Direction.x * 0.8f, Mathf.Abs(m_Direction.x) * 0.8f, 0.0f);
-        m_Rigidbody.constraints &=  ~RigidbodyConstraints2D.FreezePositionY;
+        m_Rigidbody.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
         //SetEnableColliders(false);
         ExtendLifetime();
         m_Captured = obj;
