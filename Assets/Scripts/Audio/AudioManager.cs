@@ -1,3 +1,4 @@
+using System.Collections;
 using SPNK.Game.Events;
 using UnityEngine;
 
@@ -10,8 +11,11 @@ public class AudioManager : MonoBehaviour
     private int currentSfxSource;
 
     [Header("listent to")]
-    public AudioClipEventChannelSO musicChannel;
+    public SoundtrackSongEventChannelSO musicChannel;
     public AudioClipEventChannelSO sfxChannel;
+
+    private SoundtrackSong currentSoundtrack;
+    private Coroutine loopCoroutine;
 
     private void OnEnable()
     {
@@ -25,14 +29,13 @@ public class AudioManager : MonoBehaviour
         sfxChannel.OnEventRaised -= HandleSfxPlay;
     }
 
-    private void HandleMusicChange(AudioClip clip)
+    private void HandleMusicChange(SoundtrackSong soundtrack)
     {
-        if (musicSource.isPlaying)
-            musicSource.Stop();
-
-        musicSource.clip = clip;
-        musicSource.loop = true;
-        musicSource.Play();
+        currentSoundtrack = soundtrack;
+        if (!currentSoundtrack) return;
+        if (loopCoroutine != null) StopCoroutine(loopCoroutine);
+        musicSource.Stop();
+        loopCoroutine = StartCoroutine(DoLoopSoundtrack());
     }
 
     private void HandleSfxPlay(AudioClip clip)
@@ -41,5 +44,26 @@ public class AudioManager : MonoBehaviour
         s.pitch = Random.Range(0.85f, 1.15f);
         s.PlayOneShot(clip);
         currentSfxSource = (currentSfxSource + 1) % sfxSources.Length;
+    }
+
+    private IEnumerator DoLoopSoundtrack()
+    {
+        musicSource.clip = currentSoundtrack.fullPiece;
+        musicSource.loop = true;
+        musicSource.Play();
+        float previousTime = 0;
+        while (true)
+        {
+            if (musicSource.time < previousTime)
+            {
+                Debug.Log("Looping!!");
+                musicSource.time = currentSoundtrack.loopTime;
+            }
+
+            Debug.Log($"Song at {musicSource.time / currentSoundtrack.fullPiece.length}");
+
+            previousTime = musicSource.time;
+            yield return null;
+        }
     }
 }

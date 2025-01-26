@@ -7,10 +7,10 @@ public class EchidnaCarriable : MonoBehaviour
     public LayerTrigger playerDetector;
     public MonoBehaviour[] behavioursToDeactivate;
 
-    public AudioClip tensionMusic;
+    public SoundtrackSong tensionMusic;
 
     [Header("Broadcast to")]
-    public AudioClipEventChannelSO changeMusicChannel;
+    public SoundtrackSongEventChannelSO changeMusicChannel;
 
 
     private void OnEnable()
