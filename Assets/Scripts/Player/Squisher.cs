@@ -45,7 +45,13 @@ public class Squisher : MonoBehaviour
                     //float scaleX = m_InitScale.x * (1.0f + progress / 10.0f);
                     m_Visuals.localScale =  new Vector3(m_InitScale.x, scaleY, m_InitScale.z);
 
-                    if (m_Timeleft < 0.0f) { ToState(State.Jump_SquishUp, 0.05f); }
+                    float a = progress * 5.0f;
+                    m_Visuals.transform.localEulerAngles = new Vector3(0, 0, 5.0f + a);
+
+                    if (m_Timeleft < 0.0f)
+                    {
+                        ToState(State.Jump_SquishUp, 0.05f);
+                    }
                     break;
                 }
             case State.Jump_SquishUp:
@@ -54,11 +60,16 @@ public class Squisher : MonoBehaviour
                     //float scaleX = m_InitScale.x * (1.1f - progress / 10.0f);
                     //m_Visuals.localScale = new Vector3(scaleX, scaleY, m_InitScale.z);
 
-                    if (m_Timeleft < 0.0f) { ToState(State.Jump_Flying, 0.05f); }
+                    float a = progress * 3.0f;
+                    m_Visuals.transform.localEulerAngles = new Vector3(0, 0, 15.0f + a);
+
+                    if (m_Timeleft < 0.0f) { ToState(State.Jump_Flying, 0.2f); }
                     break;
                 }
             case State.Jump_Flying:
                 {
+                    float a = (1.0f - progress) * 13.0f;
+                    m_Visuals.transform.localEulerAngles = new Vector3(0, 0, 5.0f + a);
 
                     if (m_Timeleft < 0.0f) { ToNeutral(); ToState(State.Neutral, 0.1f); }
                     break;
@@ -88,6 +99,7 @@ public class Squisher : MonoBehaviour
     public void JumpStart()
     {
         ToState(State.Jump_SquishDown, 0.05f);
+        m_Visuals.transform.localEulerAngles = new Vector3(0, 0, 5.0f);
         // squish down + out
         // squishin + up
         // rot
@@ -103,6 +115,8 @@ public class Squisher : MonoBehaviour
     public void JumpEnd()
     {
         ToState(State.Land_Start, 0.05f);
+        //m_Visuals.Rotate(Vector3.forward, -m_Visuals.localRotation.z);
+        m_Visuals.transform.localEulerAngles = new Vector3(0, 0, 0);
         // in reverse
         // squish down + out
         // squishin + up
